@@ -1,0 +1,4 @@
+﻿  Projecto EDA 1.cpp
+F:\GitHub repos\EDA-Projecto-1\Projecto EDA 1\Projecto EDA 1\Projecto EDA 1.cpp(113,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+F:\GitHub repos\EDA-Projecto-1\Projecto EDA 1\Projecto EDA 1\Projecto EDA 1.cpp(161,40): warning C4267: '=': conversion from 'size_t' to 'char', possible loss of data
+  Projecto EDA 1.vcxproj -> F:\GitHub repos\EDA-Projecto-1\Projecto EDA 1\x64\Debug\Projecto EDA 1.exe
