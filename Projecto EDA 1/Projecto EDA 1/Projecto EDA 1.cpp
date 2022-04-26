@@ -112,7 +112,7 @@ int main() {
 
     srand(time(NULL));
     string input;
-
+    //o cheiro e gay
    /* // Create a text file
     ofstream MyWriteFile("filename.txt");
     // Write to the file
