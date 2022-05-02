@@ -12,7 +12,6 @@
 
 using namespace std;
 
-int main();
 
 struct produto {
     string nome = "N/A";
@@ -28,13 +27,8 @@ struct horta {
     string backlog = "N/A";
     produto produto;
     int tamanho = 0;
+    string area = "N/A";
 };
-
-
-
-
-
-
 
 
 
@@ -42,41 +36,10 @@ int main() {
 
     srand(time(NULL));
     string input;
-    //o cheiro e gay
-   /* // Create a text file
-    ofstream MyWriteFile("filename.txt");
-    // Write to the file
-    MyWriteFile << "Files can be tricky, but it is fun enough!";
-    // Close the file
-    MyWriteFile.close();
-    // Create a text string, which is used to output the text file
-    string myText;
-    // Read from the text file
-    ifstream MyReadFile("filename.txt");
-    // Use a while loop together with the getline() function to read the file line by line
-    while (getline(MyReadFile, myText)) {
-        // Output the text from the file
-        cout << myText;
-    }
-    // Close the file
-    MyReadFile.close();
-
-
-    string plantacao [10];
-
-    struct {             // Structure declaration
-        int myNum;         // Member (int variable)
-        string myString;   // Member (string variable)
-    } myStructure;       // Structure variable */
-
-
-    
-    
-    string produtos[100];
+    produto armazem[100];
+    int produtosNoArmazem = 0;
     int numeroHortas = 0;
     horta plantacao[15];
-        
-    
 
     cout << "Bem vindo á Plantação de EDA" << endl << endl;
     cout << "Deseja criar a plantação de raiz ou importar uma plantação existente?" << endl;
@@ -84,74 +47,147 @@ int main() {
     cin >> input;
 
     if (input == "1") {
-        numeroHortas = rand() % 6 + 5;
-        system("cls");
-       
-        cout << "Foram criadas " << numeroHortas << " novas!" << endl << endl;
+
+        int areasCount = 0;
+        int produtosCount = 0;
+        int fornecedoresCount = 0;
+
+        ifstream areas;
+        ifstream produtos;
+        ifstream fornecedores;
 
 
+        areas.open("area.txt");
+        if (areas.is_open()) {
+            string line;
+            while (getline(areas, line)) {
+                areasCount++;
+            }
+            areas.close();
+        }     
 
-        //Para cada horta criada
-        for (int i = 0; i < numeroHortas; i++) 
-        {
+              
+        produtos.open("produtos.txt");
+        if (produtos.is_open()) {
+            string line;
+            while (getline(produtos, line)) {
+                produtosCount++;
+            }
+            produtos.close();
+        }       
 
+        
+        fornecedores.open("fornecedores.txt");
+        if (fornecedores.is_open()) {
+            string line;
+            while (getline(fornecedores, line)) {
+                fornecedoresCount++;
+            }
+            fornecedores.close();
+        }
+
+            numeroHortas = rand() % 6 + 5;
+
+            system("cls");
+            cout << "Foram criadas " << numeroHortas << " novas!" << endl << endl;
+
+            //Para cada horta criada
+            for (int i = 0; i < numeroHortas; i++)
+            {
+                string areaRandom;
+                areas.open("area.txt");
+                string line;
+                int random = rand() % areasCount;
+                for (int i = 0; i < random; i++)
+                {
+                    
+                    getline(areas, line);
+                }
+                areas.close();
+                plantacao[i].area = line;
                 plantacao[i].nome = 65 + i;
                 plantacao[i].tamanho = rand() % 6 + 3;
                 cout << "A horta " << plantacao[i].nome << " foi criada com o tamanho de: " << plantacao[i].tamanho << endl;
                 cout << "Introduza o nome do responsavel:" << endl;
                 cin >> plantacao[i].agricultor;
                 cout << endl;
-            
+            }
+            //criação dos 15 produtos random
+            for ( int i = 0; i < 15; i++)
+            {  
+                    string produtoRandom;
+                    string areaRandom;
+                    string fornecedorRandom;
 
-        }
+                    produtos.open("produtos.txt");
+                    string line;
 
-    }
-    else if (input == "2") { //IMPORT FILES
-        //Import code
-    }
-
-
-
-
-    while (input != "0") {
-
-        system("cls");
-        cout << "Horta" << endl;
-        cout << "G + enter para menu de gestão" << endl;
-        cout << "S + ENTER - esqueci-me o que é" <<endl;
-
-        cout << "0 - Exit" << endl;
-   
-        cin >> input;
-
-        if (input == "g") { // GESTÃO
-            //MenuGestao();
-            MenuGestao();
-            
-        }
-        else if (input == "z") { // Testes
-            for (int i = 0; i < numeroHortas; i++) {
-                cout << plantacao[i].agricultor << " " ;                
-                cout << plantacao[i].nome << " " ;
-                cout << plantacao[i].tamanho << " " << endl;
-                }
+                    int random = rand() % produtosCount;
+                    cout << "005" << random <<endl;
+                    for (int i = 0; i < random; i++)
+                    {
+                            getline(produtos, line);                
+                    }
+                    produtos.close();
+                    armazem[i].nome = line;
+                    cout << "produto " << i << ": " << armazem[i].nome;
+                    cout << "Introduza o nome do responsavel:" << endl;
+                    cin >> input;
+                    produtosNoArmazem++;
+            }
+            system("cls");
+            for (int i = 0; i < produtosNoArmazem ; i++)
+            {
+                cout << armazem[i].nome << endl;
+            }
             cin >> input;
-            
         }
-        else if (input == "0") { // SAIR DO PROGRAMA
-            break;
+        else if (input == "2") { //IMPORT FILES
+            //Import code
         }
 
-        
+
+
+
+        while (input != "0") {
+
+            system("cls");
+            cout << "Horta" << endl;
+            cout << "G + enter para menu de gestão" << endl;
+            cout << "S + ENTER - esqueci-me o que é" << endl;
+
+            cout << "0 - Exit" << endl;
+
+            cin >> input;
+
+            if (input == "g") { // GESTÃO
+                //MenuGestao();
+                MenuGestao();
+
+            }
+            else if (input == "z") { // Testes
+                for (int i = 0; i < numeroHortas; i++) {
+                    cout << plantacao[i].agricultor << " ";
+                    cout << plantacao[i].nome << " ";
+                    cout << plantacao[i].tamanho << " " << endl;
+                }
+                cin >> input;
+
+            }
+            else if (input == "0") { // SAIR DO PROGRAMA
+                break;
+            }
+
+
+
+        }
+
+
+
+
+        return 0;
 
     }
-
-   
-
-   
-    return 0;
-
-}
 
 
 
