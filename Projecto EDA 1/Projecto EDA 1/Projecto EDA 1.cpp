@@ -15,10 +15,11 @@ using namespace std;
 
 struct produto {
     string nome = "N/A";
-    string classe = "N/A";
+    string area = "N/A";
     int rega = 0;
     int duracao = 0;
     int resistencia = 0;
+    string fornecedores = "N/A";
 };
 
 struct horta {
@@ -119,21 +120,44 @@ int main() {
                     string areaRandom;
                     string fornecedorRandom;
 
-                    produtos.open("produtos.txt");
                     string line;
+                    int random;
 
-                    int random = rand() % produtosCount;
-                    cout << "005" << random <<endl;
+                    produtosNoArmazem++;
+                    produtos.open("produtos.txt");                    
+                    random = rand() % produtosCount;
                     for (int i = 0; i < random; i++)
                     {
                             getline(produtos, line);                
                     }
                     produtos.close();
                     armazem[i].nome = line;
-                    cout << "produto " << i << ": " << armazem[i].nome;
-                    cout << "Introduza o nome do responsavel:" << endl;
+
+                    areas.open("area.txt");
+                    random = rand() % areasCount;
+                    for (int i = 0; i < random; i++)
+                    {
+                        getline(areas, line);
+                    }
+                    areas.close();
+                    armazem[i].area = line;
+
+                    fornecedores.open("fornecedores.txt");
+                    random = rand() % fornecedoresCount;
+                    for (int i = 0; i < random; i++)
+                    {
+                        getline(fornecedores, line);
+                    }
+                    fornecedores.close();
+                    armazem[i].fornecedores = line;
+
+                    
+                    armazem[i].rega = rand() % 5 + 1;
+                    cout << "rega: " << armazem[i].rega << endl;
+
+                    
                     cin >> input;
-                    produtosNoArmazem++;
+                    
             }
             system("cls");
             for (int i = 0; i < produtosNoArmazem ; i++)
