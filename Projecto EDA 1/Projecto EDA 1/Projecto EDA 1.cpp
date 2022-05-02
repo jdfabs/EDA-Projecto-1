@@ -72,9 +72,9 @@ int main() {
 
     
     
-    string *produtos;
+    string produtos[100];
     int numeroHortas = 0;
-    horta hortas[15];
+    horta plantacao[15];
         
     
 
@@ -89,19 +89,22 @@ int main() {
        
         cout << "Foram criadas " << numeroHortas << " novas!" << endl << endl;
 
+
+
         //Para cada horta criada
         for (int i = 0; i < numeroHortas; i++) 
         {
 
-                hortas[i].nome = 65 + i;
-                hortas[i].tamanho = rand() % 6 + 3;
-                cout << "A horta " << hortas[i].nome << " foi criada com o tamanho de: " << hortas[i].tamanho << endl;
+                plantacao[i].nome = 65 + i;
+                plantacao[i].tamanho = rand() % 6 + 3;
+                cout << "A horta " << plantacao[i].nome << " foi criada com o tamanho de: " << plantacao[i].tamanho << endl;
                 cout << "Introduza o nome do responsavel:" << endl;
-                cin >> hortas[i].agricultor;
+                cin >> plantacao[i].agricultor;
                 cout << endl;
             
 
         }
+
     }
     else if (input == "2") { //IMPORT FILES
         //Import code
@@ -128,9 +131,9 @@ int main() {
         }
         else if (input == "z") { // Testes
             for (int i = 0; i < numeroHortas; i++) {
-                cout << hortas[i].agricultor << " " ;                
-                cout << hortas[i].nome << " " ;
-                cout << hortas[i].tamanho << " " << endl;
+                cout << plantacao[i].agricultor << " " ;                
+                cout << plantacao[i].nome << " " ;
+                cout << plantacao[i].tamanho << " " << endl;
                 }
             cin >> input;
             
