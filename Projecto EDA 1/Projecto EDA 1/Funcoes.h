@@ -1,6 +1,11 @@
 #pragma once
 
+#include <iostream>
+#include <stdlib.h>
+#include <time.h>
 #include <string>
+#include <fstream>
+#include <Funcoes.h>
 
 using namespace std;
 

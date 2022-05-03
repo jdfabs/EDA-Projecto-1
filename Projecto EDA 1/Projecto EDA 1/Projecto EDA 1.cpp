@@ -167,6 +167,7 @@ int main() {
 
                     
                     armazem[i].rega = rand() % 5 + 1;
+                    armazem[i].resistencia = rand() % 
 
             }
             system("cls");
@@ -217,7 +218,7 @@ int main() {
                 }
                 cin >> input;
 
-                cout << "armazem: " << produtosNoArmazem;
+                cout << "armazem: " << produtosNoArmazem << endl;
                 for (int i = 0; i < produtosNoArmazem; i++)
                 {
                     cout << armazem[i].nome << " " << armazem[i].area << " "  << endl;
@@ -238,13 +239,13 @@ int main() {
     }
 
     void Ciclo(int* hortaCount, horta plantacao[], int* produtosNoArmazem, int* produtosCount, int* areasCount, int* fornecedoresCount, produto armazem[]) {
-        //colheita de Produtos
-        cout << "Colheita de produtos" << endl;
-
         ifstream areas;
         ifstream produtos;
         ifstream fornecedores;
-        string input;        
+        string input;
+
+        //colheita de Produtos
+        cout << "Colheita de produtos" << endl;
 
         for (int i = 0; i < *hortaCount; i++)
         {
@@ -267,6 +268,7 @@ int main() {
             }
         }
         cin >> input;
+
         //Rega
         cout << "Rega" << endl;
         for (int i = 0; i < *hortaCount; i++)
@@ -281,9 +283,8 @@ int main() {
             }
         }
         cin >> input;
-        //Criação produtos
-         //criação dos 10 produtos random
 
+        //criação dos 10 produtos random
         cout << "criação de produtos" << endl;
         for (int i = 0; i < 10; i++)
         {
@@ -334,6 +335,8 @@ int main() {
             cout << armazem[i].nome << endl;
         }
         cin >> input;
+
+
         //Remoção de produtos (plantar)
         cout << "remocao de produtos" << endl;
 
@@ -345,7 +348,7 @@ int main() {
                 for (int i = 0; i < *produtosNoArmazem; i++)
                 {
                     
-                    if (armazem[i].area == plantacao[x].area && hortaDone == false)
+                    if (armazem[i].area == plantacao[x].area && hortaDone == false && plantacao[x].produto.nome == "N/A")
                     {
                         plantacao[x].produto.nome = armazem[i].nome;
                         plantacao[x].produto.duracao = armazem[i].duracao;
@@ -354,17 +357,16 @@ int main() {
                         plantacao[x].produto.resistencia = armazem[i].resistencia;
                         plantacao[x].regaCooldown = armazem[i].rega;
                         hortaDone = true;
-                        /*for (int i = 0; i < *produtosNoArmazem; i++)
+                        for (int y = i; y < *produtosNoArmazem+1; y++)
                         {
-                            armazem[i].area = armazem[i + 1].area;
-                            armazem[i].duracao = armazem[i + 1].duracao;
-                            armazem[i].fornecedores = armazem[i + 1].fornecedores;
-                            armazem[i].nome = armazem[i + 1].nome;
-                            armazem[i].rega = armazem[i + 1].rega;
-                            armazem[i].resistencia = armazem[i + 1].resistencia;
-                        }*/
-
-                    
+                            armazem[y].area = armazem[y + 1].area;
+                            armazem[y].duracao = armazem[y + 1].duracao;
+                            armazem[y].fornecedores = armazem[y + 1].fornecedores;
+                            armazem[y].nome = armazem[y + 1].nome;
+                            armazem[y].rega = armazem[y + 1].rega;
+                            armazem[y].resistencia = armazem[y + 1].resistencia;
+                        }
+                        *produtosNoArmazem = *produtosNoArmazem -1;                    
                     }
                 }
             }
@@ -374,6 +376,16 @@ int main() {
 
         //pragas
         cout << "pragas" << endl;
+
+        for (int i = 0; i < *hortaCount; i++)
+        {
+            if (plantacao[i].regaCooldown = 1)
+            {
+                int random = rand() % 100;
+                plantacao[i].produto.resistencia
+            }
+        }
+
 
         cin >> input;
 
