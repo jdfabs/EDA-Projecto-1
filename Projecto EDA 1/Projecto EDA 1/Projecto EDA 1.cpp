@@ -25,10 +25,11 @@ struct produto {
 struct horta {
     char nome = 'Z';
     string agricultor = "N/A";
-    string backlog = "N/A";
+    string backlog[100];
     produto produto;
     int tamanho = 0;
     string area = "N/A";
+    int regaCooldown = 0;
 };
 
 
@@ -41,6 +42,8 @@ int main() {
     int produtosNoArmazem = 0;
     int numeroHortas = 0;
     horta plantacao[15];
+
+    int hortaCount = 0;
 
     cout << "Bem vindo á Plantação de EDA" << endl << endl;
     cout << "Deseja criar a plantação de raiz ou importar uma plantação existente?" << endl;
@@ -111,6 +114,7 @@ int main() {
                 cout << "A horta " << plantacao[i].nome << " foi criada com o tamanho de: " << plantacao[i].tamanho << endl;
                 cout << "Introduza o nome do responsavel:" << endl;
                 cin >> plantacao[i].agricultor;
+                hortaCount++;
                 cout << endl;
             }
             //criação dos 15 produtos random
@@ -153,11 +157,7 @@ int main() {
 
                     
                     armazem[i].rega = rand() % 5 + 1;
-                    cout << "rega: " << armazem[i].rega << endl;
 
-                    
-                    cin >> input;
-                    
             }
             system("cls");
             for (int i = 0; i < produtosNoArmazem ; i++)
@@ -171,7 +171,7 @@ int main() {
         }
 
 
-
+        //menu geral
 
         while (input != "0") {
 
@@ -206,10 +206,90 @@ int main() {
 
         }
 
-
-
-
         return 0;
+
+    }
+
+
+    void Ciclo(int hortaCount, horta plantacao[], int produtosNoArmazem, fstream produtos, fstream areas, fstream fornecedores, int produtosCount, int areasCount, int fornecedoresCount, produto armazem[]) {
+        //colheita de Produtos
+        for (int i = 0; i < hortaCount; i++)
+        {
+            int random = rand() % 4;
+            if (random == 4) {
+                for (int x = 0; x < 100; x++)
+                {
+                    if (plantacao[i].backlog[x] == "") {
+                        plantacao[i].backlog[x] = plantacao[i].produto.nome;
+                    }
+                 }                
+                plantacao[i].produto.nome = "N/A";
+            }
+        }        
+        //Rega
+        for (int i = 0; i < hortaCount; i++)
+        {
+            if (plantacao[i].regaCooldown == 0)
+            {
+                plantacao[i].regaCooldown = plantacao[i].produto.rega;
+            }
+            else
+            {
+                plantacao[i].regaCooldown--;
+            }
+        }        
+        //Criação produtos
+         //criação dos 10 produtos random
+        for (int i = 0; i < 10; i++)
+        {
+            string produtoRandom;
+            string areaRandom;
+            string fornecedorRandom;
+
+            string line;
+            int random;
+
+            produtosNoArmazem++;
+            produtos.open("produtos.txt");
+            random = rand() % produtosCount;
+            for (int i = 0; i < random; i++)
+            {
+                getline(produtos, line);
+            }
+            produtos.close();
+            armazem[i+ produtosNoArmazem].nome = line;
+
+            areas.open("area.txt");
+            random = rand() % areasCount;
+            for (int i = 0; i < random; i++)
+            {
+                getline(areas, line);
+            }
+            areas.close();
+            armazem[i+ produtosNoArmazem].area = line;
+
+            fornecedores.open("fornecedores.txt");
+            random = rand() % fornecedoresCount;
+            for (int i = 0; i < random; i++)
+            {
+                getline(fornecedores, line);
+            }
+            fornecedores.close();
+            armazem[i+ produtosNoArmazem].fornecedores = line;
+
+
+            armazem[i+ produtosNoArmazem].rega = rand() % 5 + 1;
+
+        }
+        
+        //Remoção de produtos (plantar)
+        for (int i = 0; i < 10; i++)
+        {
+
+        }
+        
+        //pragas
+
 
     }
 
