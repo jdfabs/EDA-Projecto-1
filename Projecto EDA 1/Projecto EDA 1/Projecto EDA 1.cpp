@@ -167,15 +167,10 @@ int main() {
 
                     
                     armazem[i].rega = rand() % 5 + 1;
-                    armazem[i].resistencia = rand() % 
+                    armazem[i].resistencia = rand() % 100;
 
             }
             system("cls");
-            for (int i = 0; i < produtosNoArmazem ; i++)
-            {
-                cout << armazem[i].nome << endl;
-            }
-            cin >> input;
         }
         else if (input == "2") { //IMPORT FILES
             //Import code
@@ -216,7 +211,7 @@ int main() {
                 {
                     cout << plantacao[i].nome << " " << plantacao[i].produto.nome << " " << plantacao[i].area << " " << plantacao[i].regaCooldown << " " << endl;
                 }
-                cin >> input;
+                
 
                 cout << "armazem: " << produtosNoArmazem << endl;
                 for (int i = 0; i < produtosNoArmazem; i++)
@@ -249,40 +244,44 @@ int main() {
 
         for (int i = 0; i < *hortaCount; i++)
         {
-            cout << "001" << endl;
+            
             int random = rand() % 4;
-            cout << "random value" << random << endl;
+            
             if (random == 3) {
-                cout << "002" << endl;
+             
                 for (int x = 0; x < 100; x++)
                 {
-                    cout << "003" << endl;
+                   
                     if (plantacao[i].backlog[x] == "") {
-                        cout << "004" << endl;
+                        
                         plantacao[i].backlog[x] = plantacao[i].produto.nome;
                         break;
                     }
                 }
                 plantacao[i].produto.nome = "N/A";
-                cout << "005" << endl;
+                
             }
         }
-        cin >> input;
+      
 
         //Rega
         cout << "Rega" << endl;
         for (int i = 0; i < *hortaCount; i++)
         {
-            if (plantacao[i].regaCooldown == 0)
+            if (plantacao[i].produto.nome != "N/A")
             {
-                plantacao[i].regaCooldown = plantacao[i].produto.rega;
+                if (plantacao[i].regaCooldown == 0)
+                {
+                    plantacao[i].regaCooldown = plantacao[i].produto.rega;
+                }
+                else
+                {
+                    plantacao[i].regaCooldown--;
+                }
             }
-            else
-            {
-                plantacao[i].regaCooldown--;
-            }
+            
         }
-        cin >> input;
+        
 
         //criação dos 10 produtos random
         cout << "criação de produtos" << endl;
@@ -334,7 +333,7 @@ int main() {
         {
             cout << armazem[i].nome << endl;
         }
-        cin >> input;
+        
 
 
         //Remoção de produtos (plantar)
@@ -372,17 +371,21 @@ int main() {
             }
 
    
-        cin >> input;
+       
 
         //pragas
         cout << "pragas" << endl;
 
         for (int i = 0; i < *hortaCount; i++)
         {
-            if (plantacao[i].regaCooldown = 1)
+            if (plantacao[i].regaCooldown = 1 && plantacao[i].produto.nome != "N/A")
             {
                 int random = rand() % 100;
-                plantacao[i].produto.resistencia
+                if (plantacao[i].produto.resistencia < random)
+                {
+                    cout << "Uma produção foi perdida" << endl;
+                    plantacao[i].produto.nome = "N/A";
+                };
             }
         }
 
