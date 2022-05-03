@@ -14,24 +14,7 @@ using namespace std;
 
 
 
-struct produto {
-    string nome = "N/A";
-    string area = "N/A";
-    int rega = 0;
-    int duracao = 0;
-    int resistencia = 0;
-    string fornecedores = "N/A";
-};
 
-struct horta {
-    char nome = 'Z';
-    string agricultor = "N/A";
-    string backlog[100];
-    produto produto;
-    int tamanho = 0;
-    string area = "N/A";
-    int regaCooldown = 0;
-};
 
 void Ciclo(int* hortaCount, horta plantacao[], int* produtosNoArmazem, int* produtosCount, int* areasCount, int* fornecedoresCount, produto armazem[]);
 
@@ -65,6 +48,7 @@ int main() {
     cout << "(1) Nova" << endl << "(2) Importar" << endl << "(0) Sair do programa" << endl;
     cin >> input;
 
+    //inicializaçao
     if (input == "1") {
 
         
@@ -140,7 +124,7 @@ int main() {
                     produtosNoArmazem++;
                     produtos.open("produtos.txt");                    
                     random = rand() % produtosCount;
-                    for (int i = 0; i < random; i++)
+                    for (int i = 0; i < random-1; i++)
                     {
                             getline(produtos, line);                
                     }
@@ -167,7 +151,7 @@ int main() {
 
                     
                     armazem[i].rega = rand() % 5 + 1;
-                    armazem[i].resistencia = rand() % 100;
+                    armazem[i].resistencia = rand() % 50 + 50;
 
             }
             system("cls");
@@ -175,7 +159,6 @@ int main() {
         else if (input == "2") { //IMPORT FILES
             //Import code
         }
-
 
         //menu geral
 
@@ -190,16 +173,101 @@ int main() {
             cin >> input;
 
             if (input == "g") { // GESTÃO
-                //MenuGestao();
-                MenuGestao();
+               
+                system("cls"); //LIMPAR CONSOLA
+                string input;
+
+
+                cout << "*****Bem Vindo Gestor*****" << endl;
+                cout << "(1).Colher Produto" << endl;
+                cout << "(2).Atualizar tempo de rega" << endl;
+                cout << "(3).Fertilização" << endl;
+                cout << "(4).Gravar Plantação" << endl;
+                cout << "(5).Carregar Plantação" << endl;
+                cout << "(6).Imprimir Plantação" << endl;
+                cout << "(7).Criar nova área" << endl;
+                cout << "(8).Mostrar registo de agricultor" << endl;
+                cout << "(9).Alterar área" << endl;
+                cout << "(0).Voltar" << endl;
+                cout << "Seleccione a sua opção :" << endl;
+
+                cin >> input;
+
+                // Colher Produto
+                if (input == "1") {
+                    system("cls");
+                    cout << "----Colheita Manual----" << endl;
+                    cout << "Indique o produto a colher" << endl;
+                    cin >> input;
+                    
+                    ColheitaManual(input, plantacao, &hortaCount);
+
+                }
+                //Atualizar tempo de rega
+                if (input == "2") {
+                    string produto;
+                    int tempo;
+                    cout << "produto a alterar:"<<endl;
+                    cin >> produto;
+                    cout << "novo tempo: " << endl;
+                    cin >> tempo;
+                    AtualizarRega(produto,tempo,plantacao,&hortaCount, armazem, &produtosNoArmazem);
+                }
+                //Fertilização
+                if (input == "3") {
+
+
+                }
+
+                //Gravar Plantação
+                if (input == "4") {
+
+
+                }
+                //Carregar Plantação
+                if (input == "5") {
+
+
+                }
+                //Imprimir Plantação
+                if (input == "6") {
+                    PrintProducts(plantacao, &hortaCount, armazem, &produtosNoArmazem);
+
+                }
+                //Criar nova área
+                if (input == "7") {
+
+
+                }
+                //Mostrar registo de agricultor
+                if (input == "8") {
+                    
+                    cout << "introduza o nome do agricultor: " << endl;
+                    cin >> input;
+                    Backlog(input, plantacao, numeroHortas);
+
+                }
+                //Alterar área
+                if (input == "9") {
+                    char nomeDaHorta;
+                    string novaArea;
+                    cout << "introduza o nome da horta: " << endl;
+                    cin >> nomeDaHorta;
+                    cout << "introduza a nova area: " << endl;
+                    cin >> novaArea;
+                    AlterarArea(plantacao, nomeDaHorta, novaArea, numeroHortas);
+                }
 
             }
 
+            //ativar novo ciclo
             if (input == "s")
             {
                 Ciclo(&hortaCount, plantacao, &produtosNoArmazem, &produtosCount, &areasCount, &fornecedoresCount, armazem);
             }
-            else if (input == "z") { // Testes
+
+            // Testes
+            else if (input == "z") { 
                 /*for (int i = 0; i < produtosNoArmazem; i++) {
                     cout  << armazem[i].nome << endl;
                 }
@@ -209,14 +277,14 @@ int main() {
 
                 for (int i = 0; i < hortaCount; i++)
                 {
-                    cout << plantacao[i].nome << " " << plantacao[i].produto.nome << " " << plantacao[i].area << " " << plantacao[i].regaCooldown << " " << endl;
+                    cout << plantacao[i].nome << " " << plantacao[i].produto.nome << " " << plantacao[i].area << " "<< plantacao[i].produto.rega << " " << plantacao[i].regaCooldown << " " << endl;
                 }
                 
 
                 cout << "armazem: " << produtosNoArmazem << endl;
                 for (int i = 0; i < produtosNoArmazem; i++)
                 {
-                    cout << armazem[i].nome << " " << armazem[i].area << " "  << endl;
+                    cout << armazem[i].nome << " " << armazem[i].area << " "  << armazem[i].rega << endl;
                 }
                 cin >> input;
 
@@ -356,6 +424,9 @@ int main() {
                         plantacao[x].produto.resistencia = armazem[i].resistencia;
                         plantacao[x].regaCooldown = armazem[i].rega;
                         hortaDone = true;
+
+
+                        //compactar armazem (mover os produtos para o inicio)
                         for (int y = i; y < *produtosNoArmazem+1; y++)
                         {
                             armazem[y].area = armazem[y + 1].area;
@@ -378,7 +449,7 @@ int main() {
 
         for (int i = 0; i < *hortaCount; i++)
         {
-            if (plantacao[i].regaCooldown = 1 && plantacao[i].produto.nome != "N/A")
+            if (plantacao[i].regaCooldown == 1 && plantacao[i].produto.nome != "N/A")
             {
                 int random = rand() % 100;
                 if (plantacao[i].produto.resistencia < random)
@@ -396,7 +467,6 @@ int main() {
     }
 
     
-
 
 
 
