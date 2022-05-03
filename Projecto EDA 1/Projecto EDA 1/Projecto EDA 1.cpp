@@ -13,6 +13,7 @@
 using namespace std;
 
 
+
 struct produto {
     string nome = "N/A";
     string area = "N/A";
@@ -32,6 +33,7 @@ struct horta {
     int regaCooldown = 0;
 };
 
+void Ciclo(int* hortaCount, horta plantacao[], int* produtosNoArmazem, int* produtosCount, int* areasCount, int* fornecedoresCount, produto armazem[]);
 
 
 int main() {
@@ -39,11 +41,24 @@ int main() {
     srand(time(NULL));
     string input;
     produto armazem[100];
-    int produtosNoArmazem = 0;
-    int numeroHortas = 0;
     horta plantacao[15];
 
+
+
+    int produtosNoArmazem = 0;
+    int numeroHortas = 0;
+    
+
     int hortaCount = 0;
+
+    ifstream areas;
+    ifstream produtos;
+    ifstream fornecedores;
+
+    int areasCount = 0;
+    int produtosCount = 0;
+    int fornecedoresCount = 0;
+
 
     cout << "Bem vindo á Plantação de EDA" << endl << endl;
     cout << "Deseja criar a plantação de raiz ou importar uma plantação existente?" << endl;
@@ -52,13 +67,8 @@ int main() {
 
     if (input == "1") {
 
-        int areasCount = 0;
-        int produtosCount = 0;
-        int fornecedoresCount = 0;
-
-        ifstream areas;
-        ifstream produtos;
-        ifstream fornecedores;
+        
+        
 
 
         areas.open("area.txt");
@@ -178,8 +188,7 @@ int main() {
             system("cls");
             cout << "Horta" << endl;
             cout << "G + enter para menu de gestão" << endl;
-            cout << "S + ENTER - esqueci-me o que é" << endl;
-
+            cout << "S + ENTER - Avançar ciclo" << endl;
             cout << "0 - Exit" << endl;
 
             cin >> input;
@@ -189,11 +198,29 @@ int main() {
                 MenuGestao();
 
             }
+
+            if (input == "s")
+            {
+                Ciclo(&hortaCount, plantacao, &produtosNoArmazem, &produtosCount, &areasCount, &fornecedoresCount, armazem);
+            }
             else if (input == "z") { // Testes
-                for (int i = 0; i < numeroHortas; i++) {
-                    cout << plantacao[i].agricultor << " ";
-                    cout << plantacao[i].nome << " ";
-                    cout << plantacao[i].tamanho << " " << endl;
+                /*for (int i = 0; i < produtosNoArmazem; i++) {
+                    cout  << armazem[i].nome << endl;
+                }
+
+                cout << produtosNoArmazem << endl;
+                cin >> input;*/
+
+                for (int i = 0; i < hortaCount; i++)
+                {
+                    cout << plantacao[i].nome << " " << plantacao[i].produto.nome << " " << plantacao[i].area << " " << plantacao[i].regaCooldown << " " << endl;
+                }
+                cin >> input;
+
+                cout << "armazem: " << produtosNoArmazem;
+                for (int i = 0; i < produtosNoArmazem; i++)
+                {
+                    cout << armazem[i].nome << " " << armazem[i].area << " "  << endl;
                 }
                 cin >> input;
 
@@ -210,24 +237,39 @@ int main() {
 
     }
 
-
-    void Ciclo(int hortaCount, horta plantacao[], int produtosNoArmazem, fstream produtos, fstream areas, fstream fornecedores, int produtosCount, int areasCount, int fornecedoresCount, produto armazem[]) {
+    void Ciclo(int* hortaCount, horta plantacao[], int* produtosNoArmazem, int* produtosCount, int* areasCount, int* fornecedoresCount, produto armazem[]) {
         //colheita de Produtos
-        for (int i = 0; i < hortaCount; i++)
+        cout << "Colheita de produtos" << endl;
+
+        ifstream areas;
+        ifstream produtos;
+        ifstream fornecedores;
+        string input;        
+
+        for (int i = 0; i < *hortaCount; i++)
         {
+            cout << "001" << endl;
             int random = rand() % 4;
-            if (random == 4) {
+            cout << "random value" << random << endl;
+            if (random == 3) {
+                cout << "002" << endl;
                 for (int x = 0; x < 100; x++)
                 {
+                    cout << "003" << endl;
                     if (plantacao[i].backlog[x] == "") {
+                        cout << "004" << endl;
                         plantacao[i].backlog[x] = plantacao[i].produto.nome;
+                        break;
                     }
-                 }                
+                }
                 plantacao[i].produto.nome = "N/A";
+                cout << "005" << endl;
             }
-        }        
+        }
+        cin >> input;
         //Rega
-        for (int i = 0; i < hortaCount; i++)
+        cout << "Rega" << endl;
+        for (int i = 0; i < *hortaCount; i++)
         {
             if (plantacao[i].regaCooldown == 0)
             {
@@ -237,9 +279,12 @@ int main() {
             {
                 plantacao[i].regaCooldown--;
             }
-        }        
+        }
+        cin >> input;
         //Criação produtos
          //criação dos 10 produtos random
+
+        cout << "criação de produtos" << endl;
         for (int i = 0; i < 10; i++)
         {
             string produtoRandom;
@@ -249,49 +294,93 @@ int main() {
             string line;
             int random;
 
-            produtosNoArmazem++;
+            
+
             produtos.open("produtos.txt");
-            random = rand() % produtosCount;
+            random = rand() % *produtosCount;
+            cout << "001" << endl;
             for (int i = 0; i < random; i++)
             {
                 getline(produtos, line);
             }
             produtos.close();
-            armazem[i+ produtosNoArmazem].nome = line;
+            cout << "002" << endl;
 
+            armazem[i + *produtosNoArmazem].nome = line;
             areas.open("area.txt");
-            random = rand() % areasCount;
+            random = rand() % *areasCount;
             for (int i = 0; i < random; i++)
             {
                 getline(areas, line);
             }
             areas.close();
-            armazem[i+ produtosNoArmazem].area = line;
+            armazem[i + *produtosNoArmazem].area = line;
 
             fornecedores.open("fornecedores.txt");
-            random = rand() % fornecedoresCount;
+            random = rand() % *fornecedoresCount;
             for (int i = 0; i < random; i++)
             {
                 getline(fornecedores, line);
             }
             fornecedores.close();
-            armazem[i+ produtosNoArmazem].fornecedores = line;
-
-
-            armazem[i+ produtosNoArmazem].rega = rand() % 5 + 1;
-
+            armazem[i + *produtosNoArmazem].fornecedores = line;
+            armazem[i + *produtosNoArmazem].rega = rand() % 5 + 1;
+            
         }
-        
-        //Remoção de produtos (plantar)
-        for (int i = 0; i < 10; i++)
+        *produtosNoArmazem = *produtosNoArmazem + 10;
+
+        for (int i = 0; i < *produtosNoArmazem; i++)
         {
-
+            cout << armazem[i].nome << endl;
         }
-        
+        cin >> input;
+        //Remoção de produtos (plantar)
+        cout << "remocao de produtos" << endl;
+
+            bool hortaDone = false;
+            for (int x = 0; x < *hortaCount; x++)                
+            {
+                hortaDone = false;
+                
+                for (int i = 0; i < *produtosNoArmazem; i++)
+                {
+                    
+                    if (armazem[i].area == plantacao[x].area && hortaDone == false)
+                    {
+                        plantacao[x].produto.nome = armazem[i].nome;
+                        plantacao[x].produto.duracao = armazem[i].duracao;
+                        plantacao[x].produto.fornecedores = armazem[i].fornecedores;
+                        plantacao[x].produto.rega = armazem[i].rega;
+                        plantacao[x].produto.resistencia = armazem[i].resistencia;
+                        plantacao[x].regaCooldown = armazem[i].rega;
+                        hortaDone = true;
+                        /*for (int i = 0; i < *produtosNoArmazem; i++)
+                        {
+                            armazem[i].area = armazem[i + 1].area;
+                            armazem[i].duracao = armazem[i + 1].duracao;
+                            armazem[i].fornecedores = armazem[i + 1].fornecedores;
+                            armazem[i].nome = armazem[i + 1].nome;
+                            armazem[i].rega = armazem[i + 1].rega;
+                            armazem[i].resistencia = armazem[i + 1].resistencia;
+                        }*/
+
+                    
+                    }
+                }
+            }
+
+   
+        cin >> input;
+
         //pragas
+        cout << "pragas" << endl;
+
+        cin >> input;
 
 
     }
+
+    
 
 
 

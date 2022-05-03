@@ -11,7 +11,6 @@ int Main() {
 
 
 
-
 //METODOS DE GESTÃO
 
 void ColheitaManual(string produto) {
