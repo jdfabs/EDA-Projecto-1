@@ -16,14 +16,14 @@ int main() {
 	string input;
 
 	produto* armazem;
-	int tamanhoDoArmazem = 25;
+	int tamanhoDoArmazem = 15;
 	armazem = new produto[tamanhoDoArmazem];
 	int produtosNoArmazem = 0;
 
 	produto* armazemTEMP;
 	armazemTEMP = new produto[tamanhoDoArmazem];
 
-	horta plantacao[15];
+	horta plantacao[10];
 
 	int numeroHortas = 0;
 	int hortaCount = 0;
@@ -73,9 +73,9 @@ int main() {
 				fornecedores.close();
 			}
 		}
-		numeroHortas = 5;
 
-		//numeroHortas = rand() % 6 + 5; //VOLTAR A POR!!!! FOI MUDADO PARA ^ PARA SER MAIS FACIL DAR DEBUG!
+
+		numeroHortas = rand() % 6 + 5; 
 		CriarNovaHorta(numeroHortas, &numeroHortas, &areasCount, &produtosCount, &fornecedoresCount, plantacao, &hortaCount, &areasDiferentes, areasDisponiveis);
 
 		//criação dos 15 produtos random          
@@ -165,12 +165,22 @@ int main() {
 
 			//Gravar Plantação
 			if (input == "4") {
-
-
+				ExportarHortas(tamanhoDoArmazem, produtosNoArmazem, numeroHortas, hortaCount, areasCount, produtosCount, fornecedoresCount, areasDiferentes, plantacao, areasDisponiveis);
+				ExportarArmazem(tamanhoDoArmazem, produtosNoArmazem, armazem);
 			}
 
 			//Carregar Plantação
 			if (input == "5") {
+				
+
+				ImportHortas(&tamanhoDoArmazem, &produtosNoArmazem, &numeroHortas, &hortaCount, &areasCount, & produtosCount, &fornecedoresCount, &areasDiferentes, plantacao, areasDisponiveis);
+				delete[] armazemTEMP;
+				armazemTEMP = new produto[produtosNoArmazem+15];
+				
+				delete[] armazem;
+				armazem = new produto[produtosNoArmazem + 15];
+				
+				ImportArmazem(&tamanhoDoArmazem, &produtosNoArmazem,armazem);
 
 
 			}
@@ -227,7 +237,7 @@ int main() {
 
 		// Testes
 		else if (input == "z") {
-			for (int i = 0; i < areasDiferentes; i++)
+			/*for (int i = 0; i < areasDiferentes; i++)
 			{
 				cout << areasDisponiveis[i] << endl;
 			}
@@ -245,7 +255,19 @@ int main() {
 			{
 				cout << i + 1 << ". " << armazem[i].nome << " | " << armazem[i].area << endl;
 			}
+			cin >> input;*/
+
+			cout << tamanhoDoArmazem << endl <<
+				produtosNoArmazem << endl <<
+				numeroHortas << endl <<
+				hortaCount << endl <<
+				areasCount << endl <<
+				produtosCount << endl <<
+				fornecedoresCount << endl <<
+				areasDiferentes << endl;
 			cin >> input;
+
+
 		}
 
 		else if (input == "0") { // SAIR DO PROGRAMA

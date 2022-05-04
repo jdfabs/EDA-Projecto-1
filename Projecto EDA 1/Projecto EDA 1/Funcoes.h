@@ -103,17 +103,192 @@ void Fertilizar(string area, int tempo, horta plantacao[], int* hortasCount) {
 	}
 }
 
-/*
-void Exportar(horta hortas[], string produtos[], int numeroDeHortas) {
+
+void ExportarHortas(int tamanhoDoArmazem, int produtosNoArmazem, int numeroHortas, int hortaCount, int areasCount, int produtosCount, int fornecedoresCount, int areasDiferentes, horta plantacao[], string areasDisponiveis[]) {
 	ofstream save;
-	save.open("Saves/save.txt");
-	save << "Writing this to a file.\n";
+	save.open("Save.txt");
+	//Guardar variaveis simples
+	save << tamanhoDoArmazem << "\n"
+		<< produtosNoArmazem << "\n"
+		<< numeroHortas << "\n"
+		<< hortaCount << "\n"
+		<< areasCount << "\n"
+		<< produtosCount << "\n"
+		<< fornecedoresCount << "\n"
+		<< areasDiferentes << "\n" << "||Plantacao||" << "\n";
+	//Guardar as hortas
+	for (int i = 0; i < 10; i++)
+	{
+		save << plantacao[i].nome << "\n"
+			<< plantacao[i].agricultor << "\n"
+			<< plantacao[i].tamanho << "\n"
+			<< plantacao[i].area << "\n"
+			<< plantacao[i].fertelizado << "\n"
+			<< plantacao[i].campanhaTempo << "\n" << "\n";
+		//gravar cada slot na horta
+		for (int x = 0; x < 9; x++)
+		{
+			save << plantacao[i].zona[x].nome << "\n"
+				<< plantacao[i].zona[x].area << "\n"
+				<< plantacao[i].zona[x].rega << "\n"
+				<< plantacao[i].zona[x].duracao << "\n"
+				<< plantacao[i].zona[x].resistencia << "\n"
+				<< plantacao[i].zona[x].fornecedores << "\n"
+				<< plantacao[i].zona[x].regaCooldown << "\n" << "\n";
+		}
+		for (int x = 0; x < 100; x++)
+		{
+			save << plantacao[i].backlog[x] << "\n";
+		}
+
+	}
+	//guardar as areas existentes
+	for (int i = 0; i < 15; i++)
+	{
+		save << areasDisponiveis[i] << "\n";
+	}
 	save.close();
 
-}*/
+}
+void ExportarArmazem(int tamanhoDoArmazem, int produtosNoArmazem, produto armazem[]) {
+	ofstream save;
+	save.open("SaveArmazem.txt");
 
-void Import(string path) {
+	for (int i = 0; i < produtosNoArmazem; i++)
+	{
+		save << armazem[i].nome << "\n"
+			<< armazem[i].area << "\n"
+			<< armazem[i].rega << "\n"
+			<< armazem[i].duracao << "\n"
+			<< armazem[i].resistencia << "\n"
+			<< armazem[i].fornecedores << "\n"
+			<< armazem[i].regaCooldown << "\n" << "\n";
+	}
 
+
+
+	save.close();
+}
+
+void ImportHortas(int* tamanhoDoArmazem, int* produtosNoArmazem, int* numeroHortas, int* hortaCount, int* areasCount, int* produtosCount, int* fornecedoresCount, int* areasDiferentes, horta plantacao[], string areasDisponiveis[]) {
+
+	ifstream save;
+	save.open("Save.txt");
+	if (save.is_open()) {
+		string line;
+
+		getline(save, line);
+		*tamanhoDoArmazem = stoi(line);
+		getline(save, line);
+		*produtosNoArmazem = stoi(line);
+		getline(save, line);
+		*numeroHortas = stoi(line);
+		getline(save, line);
+		*hortaCount = stoi(line);
+		getline(save, line);
+		*areasCount = stoi(line);
+		getline(save, line);
+		*produtosCount = stoi(line);
+		getline(save, line);
+		*fornecedoresCount = stoi(line);
+		getline(save, line);
+		*areasDiferentes = stoi(line);
+		getline(save, line);
+
+		for (int i = 0; i < 10; i++)
+		{
+			getline(save, line);
+			plantacao[i].nome = line[0];
+			getline(save, line);
+			plantacao[i].agricultor = line;
+			getline(save, line);
+			plantacao[i].tamanho = stoi(line);
+			getline(save, line);
+			plantacao[i].area = line;
+			getline(save, line);
+			if (line[0] == '1') {
+				plantacao[i].fertelizado = true;
+			}
+			else {
+				plantacao[i].fertelizado = false;
+			}
+			getline(save, line);
+			plantacao[i].campanhaTempo = stoi(line);
+
+			for (int x = 0; x < 9; x++)
+			{
+				getline(save, line);
+				getline(save, line);
+				plantacao[i].zona[x].nome = line;
+				getline(save, line);
+				plantacao[i].zona[x].area = line;
+				getline(save, line);
+				plantacao[i].zona[x].rega = stoi(line);
+				getline(save, line);
+				plantacao[i].zona[x].duracao = stoi(line);
+				getline(save, line);
+				plantacao[i].zona[x].resistencia = stoi(line);
+				getline(save, line);
+				plantacao[i].zona[x].fornecedores = line;
+				getline(save, line);
+				plantacao[i].zona[x].regaCooldown = stoi(line);
+
+			}
+			getline(save, line);
+			for (int y = 0; y < 100; y++)
+			{
+
+				getline(save, line);
+				plantacao[i].backlog[y] = line;
+			}
+
+		}
+		for (int i = 0; i < 15; i++)
+		{
+			getline(save, line);
+			areasDisponiveis[i] = line;
+		}
+
+
+
+		save.close();
+
+	}
+}
+void ImportArmazem(int* tamanhoDoArmazem, int* produtosNoArmazem, produto armazem[]) {
+
+	ifstream save;
+	save.open("SaveArmazem.txt");
+	if (save.is_open()) {
+		string line;
+
+
+
+		for (int i = 0; i < *produtosNoArmazem; i++)
+		{
+			getline(save, line);
+			armazem[i].nome = line;
+			getline(save, line);
+			armazem[i].area = line;
+			getline(save, line);
+			armazem[i].rega = stoi(line);
+			getline(save, line);
+			armazem[i].duracao = stoi(line);
+			getline(save, line);
+			armazem[i].resistencia = stoi(line);
+			getline(save, line);
+			armazem[i].fornecedores = line;
+			getline(save, line);
+			armazem[i].regaCooldown = stoi(line);
+			getline(save, line);
+
+		}
+
+
+
+		save.close();
+
+	}
 }
 
 void PrintProducts(horta plantacao[], int* hortasCount, produto armazem[], int* produtosNoArmazem, int* tamanhoDoArmazem) { // 0 para ordem alfabetica e 1 para tempo de plantação (não implementado)
@@ -134,9 +309,12 @@ void PrintProducts(horta plantacao[], int* hortasCount, produto armazem[], int* 
 			" | Area: " << plantacao[i].area << endl;
 		for (int x = 0; x < plantacao[i].tamanho; x++)
 		{
-			cout << "Produto: " << plantacao[i].zona[x].nome <<
-				"| Rega: " << plantacao[i].zona[x].regaCooldown <<
-				" | Resistencia: " << plantacao[i].zona[x].resistencia << "%" << endl;
+			if (plantacao[i].zona[x].nome != "N/A") {
+				cout << "Produto: " << plantacao[i].zona[x].nome <<
+					"| Rega: " << plantacao[i].zona[x].regaCooldown <<
+					" | Resistencia: " << plantacao[i].zona[x].resistencia << "%" << endl;
+			}
+
 		}
 		cout << "---------------------------------" << endl;
 	}
