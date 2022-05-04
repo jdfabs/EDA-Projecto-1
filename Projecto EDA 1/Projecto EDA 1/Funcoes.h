@@ -33,7 +33,6 @@ struct horta {
 ifstream areas;
 ifstream produtos;
 ifstream fornecedores;
-
 string input;
 
 int Main() {
@@ -41,21 +40,15 @@ int Main() {
 	return 0;
 }
 
-
-
 //METODOS DE GESTÃO
-
 void ColheitaManual(string produtoQuery, horta plantacao[], int* hortasCount) {
-
 	produtoQuery = produtoQuery + " ";
-
 	for (int i = 0; i < *hortasCount; i++)
 	{
 		for (int x = 0; x < plantacao[i].tamanho; x++)
 		{
 			if (plantacao[i].zona[x].nome == produtoQuery)
 			{
-
 				cout << "produto encontrado - a remover" << endl;
 				for (int y = 0; y < 100; y++)
 				{
@@ -69,18 +62,14 @@ void ColheitaManual(string produtoQuery, horta plantacao[], int* hortasCount) {
 				plantacao[i].zona[x].fornecedores = "N/A";
 				plantacao[i].zona[x].rega = 999;
 				plantacao[i].zona[x].resistencia = 100;
-
-
 			}
 		}
-
 	}
 }
 
 void AtualizarRega(string produtoQuery, int tempo, horta plantacao[], int* hortasCount, produto armazem[], int* produtosNoArmazem, int* tamanhoDoArmazem) {
 	produtoQuery = produtoQuery + " ";
 	string input;
-
 	for (int i = 0; i < *hortasCount; i++)
 	{
 		for (int x = 0; x < plantacao[i].tamanho; x++)
@@ -91,7 +80,6 @@ void AtualizarRega(string produtoQuery, int tempo, horta plantacao[], int* horta
 				plantacao[i].zona[x].rega = tempo;
 			}
 		}
-
 	}
 	for (int i = 0; i < *produtosNoArmazem; i++)
 	{
@@ -107,7 +95,6 @@ void AtualizarRega(string produtoQuery, int tempo, horta plantacao[], int* horta
 void Fertilizar(string area, int tempo, horta plantacao[], int* hortasCount) {
 	for (int i = 0; i < *hortasCount; i++)
 	{
-
 		if (plantacao[i].area == area)
 		{
 			plantacao[i].fertelizado = true;
@@ -115,7 +102,6 @@ void Fertilizar(string area, int tempo, horta plantacao[], int* hortasCount) {
 		}
 	}
 }
-
 
 /*
 void Exportar(horta hortas[], string produtos[], int numeroDeHortas) {
@@ -130,13 +116,11 @@ void Import(string path) {
 
 }
 
-
 void PrintProducts(horta plantacao[], int* hortasCount, produto armazem[], int* produtosNoArmazem, int* tamanhoDoArmazem) { // 0 para ordem alfabetica e 1 para tempo de plantação (não implementado)
-
 	system("cls");
 	for (int i = 0; i < *hortasCount; i++)
 	{
-		int numProdutos=0;
+		int numProdutos = 0;
 		for (int x = 0; x < plantacao[i].tamanho; x++)
 		{
 			if (plantacao[i].zona[x].nome != "N/A") {
@@ -144,44 +128,38 @@ void PrintProducts(horta plantacao[], int* hortasCount, produto armazem[], int* 
 			}
 		}
 		cout << "Horta: " << plantacao[i].nome <<
-			" | Responsavel: "<< plantacao[i].agricultor <<
+			" | Responsavel: " << plantacao[i].agricultor <<
 			" | Capacidade: " << plantacao[i].tamanho <<
-			" | Produtos: "<< numProdutos<<
-			" | Area: "<< plantacao[i].area << endl;
+			" | Produtos: " << numProdutos <<
+			" | Area: " << plantacao[i].area << endl;
 		for (int x = 0; x < plantacao[i].tamanho; x++)
 		{
-			cout  << "Produto: " << plantacao[i].zona[x].nome <<
-				"| Rega: "<< plantacao[i].zona[x].regaCooldown<<
-				" | Resistencia: "<< plantacao[i].zona[x].resistencia << "%" << endl;
+			cout << "Produto: " << plantacao[i].zona[x].nome <<
+				"| Rega: " << plantacao[i].zona[x].regaCooldown <<
+				" | Resistencia: " << plantacao[i].zona[x].resistencia << "%" << endl;
 		}
 		cout << "---------------------------------" << endl;
 	}
 	cout << "Inventario do armazem:" << endl << endl;
 	for (int i = 0; i < *produtosNoArmazem; i++)
 	{
-		cout <<  "Produto: " << armazem[i].nome 
-			<< "| Resistencia: " << armazem[i].resistencia 
-			<< " | Area: " << armazem[i].area 
+		cout << "Produto: " << armazem[i].nome
+			<< "| Resistencia: " << armazem[i].resistencia
+			<< " | Area: " << armazem[i].area
 			// << " | Fornecedor: " << armazem[i].fornecedores
 			<< endl;
 	}
-
 	string input;
 	cin >> input;
-	
-
 }
-void CriarArea(string area, int* areasDiferentes, string areasDisponiveis[]) {
 
+void CriarArea(string area, int* areasDiferentes, string areasDisponiveis[]) {
 	areasDisponiveis[*areasDiferentes] = area;
 	*areasDiferentes = *areasDiferentes + 1;
-
 }
+
 void AlterarArea(horta plantacao[], char nome, string area, int numeroDeHortas, int* areasDiferentes, string areasDisponiveis[]) {
-
-
 	string input;
-
 	for (int i = 0; i < numeroDeHortas; i++)
 	{
 		if (plantacao[i].nome == nome) {
@@ -191,6 +169,7 @@ void AlterarArea(horta plantacao[], char nome, string area, int numeroDeHortas, 
 		}
 	}
 }
+
 void Backlog(string agricultor, horta plantacao[], int numeroDeHortas) {
 	string input;
 	for (int i = 0; i < numeroDeHortas; i++)
@@ -205,29 +184,20 @@ void Backlog(string agricultor, horta plantacao[], int numeroDeHortas) {
 					cout << x + 1 << ". " << plantacao[i].backlog[x] << endl;
 				}
 			}
-
 		}
 	}
-	getline(cin, input);;
-
+	getline(cin, input);
 }
 
-
 //Fuções Gerais
-
 void AdicionarProdutoAoArmazem(int quantidade, int* produtosNoArmazem, int* produtosCount, int* areasCount, int* fornecedoresCount, produto armazem[], int* tamanhoDoArmazem, int* areasDiferentes, string areasDisponiveis[]) {
 	string produtoRandom;
 	string areaRandom;
 	string fornecedorRandom;
-
 	for (int i = 0; i < quantidade; i++)
 	{
 		string line;
 		int random;
-		cout << "002" << endl;
-
-
-
 		produtos.open("produtos.txt");
 		random = rand() % *produtosCount;
 		for (int i = 0; i < random; i++)
@@ -235,18 +205,9 @@ void AdicionarProdutoAoArmazem(int quantidade, int* produtosNoArmazem, int* prod
 			getline(produtos, line);
 		}
 		produtos.close();
-
 		armazem[i + *produtosNoArmazem].nome = line;
-
-
-
-
 		random = rand() % *areasDiferentes;
-
 		armazem[i + *produtosNoArmazem].area = areasDisponiveis[random];
-
-
-
 		fornecedores.open("fornecedores.txt");
 		random = rand() % *fornecedoresCount;
 		for (int i = 0; i < random; i++)
@@ -254,24 +215,15 @@ void AdicionarProdutoAoArmazem(int quantidade, int* produtosNoArmazem, int* prod
 			getline(fornecedores, line);
 		}
 		fornecedores.close();
-
 		armazem[i + *produtosNoArmazem].fornecedores = line;
 		armazem[i + *produtosNoArmazem].rega = rand() % 5 + 1;
 		armazem[i + *produtosNoArmazem].regaCooldown = armazem[i + *produtosNoArmazem].rega;
 		armazem[i + *produtosNoArmazem].resistencia = rand() % 50 + 50;
-
-		cout << "003" << endl;
-
 	}
-	cout << "004" << endl;
-
-
 	*produtosNoArmazem = *produtosNoArmazem + quantidade;
 }
 
 void CriarNovaHorta(int quantidade, int* numeroDeHortas, int* areasCount, int* produtosCount, int* fornecedoresCount, horta plantacao[], int* hortaCount, int* areasDiferentes, string areasDisponiveis[]) {
-
-
 	system("cls");
 	cout << "Foram criadas " << quantidade << " novas!" << endl << endl;
 
@@ -279,7 +231,6 @@ void CriarNovaHorta(int quantidade, int* numeroDeHortas, int* areasCount, int* p
 	string line;
 	for (int i = 0; i < quantidade; i++)
 	{
-
 		areas.open("area.txt");
 		int random = rand() % *areasCount;
 		for (int i = 0; i < random; i++)
@@ -296,7 +247,6 @@ void CriarNovaHorta(int quantidade, int* numeroDeHortas, int* areasCount, int* p
 		plantacao[i].tamanho = rand() % 6 + 3;
 		cout << "A horta " << plantacao[i].nome << " foi criada com o tamanho de: " << plantacao[i].tamanho << endl;
 		cout << "Introduza o nome do responsavel:" << endl;
-		getline(cin, plantacao[i].agricultor);
 		cin >> plantacao[i].agricultor;
 		*hortaCount = *hortaCount + 1;
 		cout << endl;
