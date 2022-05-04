@@ -28,6 +28,12 @@ struct horta {
     int regaCooldown = 0;
 };
 
+ifstream areas;
+ifstream produtos;
+ifstream fornecedores;
+
+string input;
+
 int Main() {
 
     return 0;
@@ -145,4 +151,53 @@ void Backlog(string agricultor, horta plantacao[],int numeroDeHortas) {
 }
 
 
+void AdicionarProdutoAoArmazem(int quantidade, int* produtosNoArmazem,int* produtosCount,int* areasCount, int* fornecedoresCount, produto armazem[] ) {
+    string produtoRandom;
+    string areaRandom;
+    string fornecedorRandom;
+    cout << "001" << endl;
+    for (int i = 0; i < quantidade; i++)
+    {        
+        string line;
+        int random;      
 
+        
+        cout << "002" << endl;
+        produtos.open("produtos.txt");
+        random = rand() % *produtosCount;
+        for (int i = 0; i < random - 1; i++)
+        {            
+            getline(produtos, line);
+        }
+        produtos.close();
+
+        armazem[i + *produtosNoArmazem].nome = line;
+
+        areas.open("area.txt");
+        random = rand() % *areasCount;
+        for (int i = 0; i < random; i++)
+        {            
+            getline(areas, line);
+        }
+        areas.close();
+
+        armazem[i + *produtosNoArmazem].area = line;
+
+        fornecedores.open("fornecedores.txt");
+        random = rand() % *fornecedoresCount;
+        for (int i = 0; i < random; i++)
+        {            
+            getline(fornecedores, line);
+        }
+        fornecedores.close();
+
+        armazem[i + *produtosNoArmazem].fornecedores = line;
+
+
+        armazem[i + *produtosNoArmazem].rega = rand() % 5 + 1;
+        armazem[i + *produtosNoArmazem].resistencia = rand() % 50 + 50;
+        
+
+    }
+    *produtosNoArmazem = *produtosNoArmazem + quantidade;
+}

@@ -34,9 +34,7 @@ int main() {
 
     int hortaCount = 0;
 
-    ifstream areas;
-    ifstream produtos;
-    ifstream fornecedores;
+   
 
     int areasCount = 0;
     int produtosCount = 0;
@@ -112,48 +110,8 @@ int main() {
                 cout << endl;
             }
             //criação dos 15 produtos random
-            for ( int i = 0; i < 15; i++)
-            {  
-                    string produtoRandom;
-                    string areaRandom;
-                    string fornecedorRandom;
-
-                    string line;
-                    int random;
-
-                    produtosNoArmazem++;
-                    produtos.open("produtos.txt");                    
-                    random = rand() % produtosCount;
-                    for (int i = 0; i < random-1; i++)
-                    {
-                            getline(produtos, line);                
-                    }
-                    produtos.close();
-                    armazem[i].nome = line;
-
-                    areas.open("area.txt");
-                    random = rand() % areasCount;
-                    for (int i = 0; i < random; i++)
-                    {
-                        getline(areas, line);
-                    }
-                    areas.close();
-                    armazem[i].area = line;
-
-                    fornecedores.open("fornecedores.txt");
-                    random = rand() % fornecedoresCount;
-                    for (int i = 0; i < random; i++)
-                    {
-                        getline(fornecedores, line);
-                    }
-                    fornecedores.close();
-                    armazem[i].fornecedores = line;
-
-                    
-                    armazem[i].rega = rand() % 5 + 1;
-                    armazem[i].resistencia = rand() % 50 + 50;
-
-            }
+                        
+            AdicionarProdutoAoArmazem(15, &produtosNoArmazem, &produtosCount, &areasCount, &fornecedoresCount, armazem);
             system("cls");
         }
         else if (input == "2") { //IMPORT FILES
@@ -353,55 +311,7 @@ int main() {
 
         //criação dos 10 produtos random
         cout << "criação de produtos" << endl;
-        for (int i = 0; i < 10; i++)
-        {
-            string produtoRandom;
-            string areaRandom;
-            string fornecedorRandom;
-
-            string line;
-            int random;
-
-            
-
-            produtos.open("produtos.txt");
-            random = rand() % *produtosCount;
-            cout << "001" << endl;
-            for (int i = 0; i < random; i++)
-            {
-                getline(produtos, line);
-            }
-            produtos.close();
-            cout << "002" << endl;
-
-            armazem[i + *produtosNoArmazem].nome = line;
-            areas.open("area.txt");
-            random = rand() % *areasCount;
-            for (int i = 0; i < random; i++)
-            {
-                getline(areas, line);
-            }
-            areas.close();
-            armazem[i + *produtosNoArmazem].area = line;
-
-            fornecedores.open("fornecedores.txt");
-            random = rand() % *fornecedoresCount;
-            for (int i = 0; i < random; i++)
-            {
-                getline(fornecedores, line);
-            }
-            fornecedores.close();
-            armazem[i + *produtosNoArmazem].fornecedores = line;
-            armazem[i + *produtosNoArmazem].rega = rand() % 5 + 1;
-            
-        }
-        *produtosNoArmazem = *produtosNoArmazem + 10;
-
-        for (int i = 0; i < *produtosNoArmazem; i++)
-        {
-            cout << armazem[i].nome << endl;
-        }
-        
+        AdicionarProdutoAoArmazem(10, produtosNoArmazem, produtosCount, areasCount, fornecedoresCount, armazem);
 
 
         //Remoção de produtos (plantar)
@@ -460,9 +370,9 @@ int main() {
             }
         }
 
-
+        
         cin >> input;
-
+        
 
     }
 
