@@ -42,7 +42,7 @@ int Main() {
 
 //METODOS DE GESTÃO
 void ColheitaManual(string produtoQuery, horta plantacao[], int* hortasCount) {
-	produtoQuery = produtoQuery + " ";
+	produtoQuery = produtoQuery + " "; //produto a colher
 	for (int i = 0; i < *hortasCount; i++)
 	{
 		for (int x = 0; x < plantacao[i].tamanho; x++)
@@ -50,14 +50,15 @@ void ColheitaManual(string produtoQuery, horta plantacao[], int* hortasCount) {
 			if (plantacao[i].zona[x].nome == produtoQuery)
 			{
 				cout << "produto encontrado - a remover" << endl;
-				for (int y = 0; y < 100; y++)
+				for (int y = 0; y < 100; y++) //adiciona o produto ao backlog
 				{
 					if (plantacao[i].backlog[y] == "") {
 						plantacao[i].backlog[y] = plantacao[i].zona[x].nome;
 						break;
 					}
-				}
-				plantacao[i].zona[x].nome = "N/A";
+				}	
+				// muda os valores do produto para os default
+				plantacao[i].zona[x].nome = "N/A";	
 				plantacao[i].zona[x].duracao = 999;
 				plantacao[i].zona[x].fornecedores = "N/A";
 				plantacao[i].zona[x].rega = 999;
@@ -125,7 +126,7 @@ void ExportarHortas(int tamanhoDoArmazem, int produtosNoArmazem, int numeroHorta
 			<< plantacao[i].area << "\n"
 			<< plantacao[i].fertelizado << "\n"
 			<< plantacao[i].campanhaTempo << "\n" << "\n";
-		//gravar cada slot na horta
+		//gravar cada zona na horta
 		for (int x = 0; x < 9; x++)
 		{
 			save << plantacao[i].zona[x].nome << "\n"
@@ -136,6 +137,7 @@ void ExportarHortas(int tamanhoDoArmazem, int produtosNoArmazem, int numeroHorta
 				<< plantacao[i].zona[x].fornecedores << "\n"
 				<< plantacao[i].zona[x].regaCooldown << "\n" << "\n";
 		}
+		//gravar backlog
 		for (int x = 0; x < 100; x++)
 		{
 			save << plantacao[i].backlog[x] << "\n";
@@ -151,9 +153,9 @@ void ExportarHortas(int tamanhoDoArmazem, int produtosNoArmazem, int numeroHorta
 
 }
 void ExportarArmazem(int tamanhoDoArmazem, int produtosNoArmazem, produto armazem[]) {
+
 	ofstream save;
 	save.open("SaveArmazem.txt");
-
 	for (int i = 0; i < produtosNoArmazem; i++)
 	{
 		save << armazem[i].nome << "\n"
@@ -164,9 +166,6 @@ void ExportarArmazem(int tamanhoDoArmazem, int produtosNoArmazem, produto armaze
 			<< armazem[i].fornecedores << "\n"
 			<< armazem[i].regaCooldown << "\n" << "\n";
 	}
-
-
-
 	save.close();
 }
 
@@ -176,7 +175,7 @@ void ImportHortas(int* tamanhoDoArmazem, int* produtosNoArmazem, int* numeroHort
 	save.open("Save.txt");
 	if (save.is_open()) {
 		string line;
-
+		//importar variaveis simples
 		getline(save, line);
 		*tamanhoDoArmazem = stoi(line);
 		getline(save, line);
@@ -194,7 +193,7 @@ void ImportHortas(int* tamanhoDoArmazem, int* produtosNoArmazem, int* numeroHort
 		getline(save, line);
 		*areasDiferentes = stoi(line);
 		getline(save, line);
-
+		//importar hortas
 		for (int i = 0; i < 10; i++)
 		{
 			getline(save, line);
@@ -214,7 +213,7 @@ void ImportHortas(int* tamanhoDoArmazem, int* produtosNoArmazem, int* numeroHort
 			}
 			getline(save, line);
 			plantacao[i].campanhaTempo = stoi(line);
-
+			//importar cada zona das hortas
 			for (int x = 0; x < 9; x++)
 			{
 				getline(save, line);
@@ -235,6 +234,7 @@ void ImportHortas(int* tamanhoDoArmazem, int* produtosNoArmazem, int* numeroHort
 
 			}
 			getline(save, line);
+			//importar o backlog
 			for (int y = 0; y < 100; y++)
 			{
 
@@ -243,13 +243,12 @@ void ImportHortas(int* tamanhoDoArmazem, int* produtosNoArmazem, int* numeroHort
 			}
 
 		}
+		//importar areas existentes
 		for (int i = 0; i < 15; i++)
 		{
 			getline(save, line);
 			areasDisponiveis[i] = line;
 		}
-
-
 
 		save.close();
 
@@ -261,8 +260,6 @@ void ImportArmazem(int* tamanhoDoArmazem, int* produtosNoArmazem, produto armaze
 	save.open("SaveArmazem.txt");
 	if (save.is_open()) {
 		string line;
-
-
 
 		for (int i = 0; i < *produtosNoArmazem; i++)
 		{
@@ -283,11 +280,7 @@ void ImportArmazem(int* tamanhoDoArmazem, int* produtosNoArmazem, produto armaze
 			getline(save, line);
 
 		}
-
-
-
 		save.close();
-
 	}
 }
 
@@ -324,7 +317,6 @@ void PrintProducts(horta plantacao[], int* hortasCount, produto armazem[], int* 
 		cout << "Produto: " << armazem[i].nome
 			<< "| Resistencia: " << armazem[i].resistencia
 			<< " | Area: " << armazem[i].area
-			// << " | Fornecedor: " << armazem[i].fornecedores
 			<< endl;
 	}
 	string input;
@@ -342,7 +334,7 @@ void AlterarArea(horta plantacao[], char nome, string area, int numeroDeHortas, 
 	{
 		if (plantacao[i].nome == nome) {
 
-			areasDisponiveis[i] = area;
+			areasDisponiveis[i] = area; //retira a area anterior e cria nova
 			plantacao[i].area = area;
 		}
 	}
@@ -354,7 +346,6 @@ void Backlog(string agricultor, horta plantacao[], int numeroDeHortas) {
 	{
 		if (plantacao[i].agricultor == agricultor)
 		{
-			cout << "000" << endl;
 			for (int x = 0; x < 100; x++)
 			{
 				if (plantacao[i].backlog[x] != "")
@@ -405,7 +396,7 @@ void CriarNovaHorta(int quantidade, int* numeroDeHortas, int* areasCount, int* p
 	system("cls");
 	cout << "Foram criadas " << quantidade << " novas!" << endl << endl;
 
-	//Para cada horta criada
+	//Para cada horta a ser criada
 	string line;
 	for (int i = 0; i < quantidade; i++)
 	{

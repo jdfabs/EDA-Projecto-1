@@ -6,11 +6,14 @@
 #include <fstream>
 #include <Funcoes.h>
 
+
+
 using namespace std;
 
 void Ciclo(int* hortaCount, horta plantacao[], int* produtosNoArmazem, int* produtosCount, int* areasCount, int* fornecedoresCount, produto armazem[], int* tamanhoDoArmazem, produto armazemTEMP[], int* areasDiferentes, string areasDisponiveis[]);
 
 int main() {
+
 
 	srand(time(NULL));
 	string input;
@@ -101,7 +104,16 @@ int main() {
 	}
 
 	else if (input == "2") { //IMPORT FILES
-		//Import code
+		system("cls");
+		cout << "Plantação importada.";
+		ImportHortas(&tamanhoDoArmazem, &produtosNoArmazem, &numeroHortas, &hortaCount, &areasCount, &produtosCount, &fornecedoresCount, &areasDiferentes, plantacao, areasDisponiveis);
+		delete[] armazemTEMP;
+		armazemTEMP = new produto[produtosNoArmazem + 15];
+
+		delete[] armazem;
+		armazem = new produto[produtosNoArmazem + 15];
+
+		ImportArmazem(&tamanhoDoArmazem, &produtosNoArmazem, armazem);
 	}
 
 	//menu geral
@@ -143,11 +155,12 @@ int main() {
 
 			//Atualizar tempo de rega
 			if (input == "2") {
+				system("cls");
 				string produto;
 				int tempo;
-				cout << "produto a alterar:" << endl;
+				cout << "Produto a alterar:" << endl;
 				cin >> produto;
-				cout << "novo tempo: " << endl;
+				cout << "Novo tempo: " << endl;
 				cin >> tempo;
 				AtualizarRega(produto, tempo, plantacao, &hortaCount, armazem, &produtosNoArmazem, &tamanhoDoArmazem);
 			}
@@ -155,6 +168,7 @@ int main() {
 			//Fertilização
 			if (input == "3") {
 				string input1;
+				system("cls");
 				int input2;
 				cout << "Area a fertelizar: " << endl;
 				cin >> input1;
@@ -164,15 +178,18 @@ int main() {
 			}
 
 			//Gravar Plantação
-			if (input == "4") {
+			system("cls"); 
+				if (input == "4") {
+				cout << "Plantação gravada.";
 				ExportarHortas(tamanhoDoArmazem, produtosNoArmazem, numeroHortas, hortaCount, areasCount, produtosCount, fornecedoresCount, areasDiferentes, plantacao, areasDisponiveis);
 				ExportarArmazem(tamanhoDoArmazem, produtosNoArmazem, armazem);
+				cin >> input;
 			}
 
 			//Carregar Plantação
 			if (input == "5") {
-				
-
+				system("cls");
+				cout << "Plantação carregada.";
 				ImportHortas(&tamanhoDoArmazem, &produtosNoArmazem, &numeroHortas, &hortaCount, &areasCount, & produtosCount, &fornecedoresCount, &areasDiferentes, plantacao, areasDisponiveis);
 				delete[] armazemTEMP;
 				armazemTEMP = new produto[produtosNoArmazem+15];
@@ -181,18 +198,20 @@ int main() {
 				armazem = new produto[produtosNoArmazem + 15];
 				
 				ImportArmazem(&tamanhoDoArmazem, &produtosNoArmazem,armazem);
-
+				cin >> input;
 
 			}
 
 			//Imprimir Plantação
 			if (input == "6") {
+				system("cls");
 				PrintProducts(plantacao, &hortaCount, armazem, &produtosNoArmazem, &tamanhoDoArmazem);
 			}
 
 			//Criar nova área
 			if (input == "7") {
 				string input;
+				system("cls");
 				cout << "Introduza o nome da nova area: " << endl;
 				cin >> input;
 				CriarArea(input, &areasDiferentes, areasDisponiveis);
@@ -200,7 +219,8 @@ int main() {
 
 			//Mostrar registo de agricultor
 			if (input == "8") {
-				cout << "introduza o nome do agricultor: " << endl;
+				system("cls");
+				cout << "Introduza o nome do agricultor: " << endl;
 				cin >> input;
 				Backlog(input, plantacao, numeroHortas);
 			}
@@ -209,16 +229,17 @@ int main() {
 			if (input == "9") {
 				char nomeDaHorta;
 				string novaArea;
-				cout << "introduza o nome da horta: " << endl;
+				system("cls");
+				cout << "Introduza o nome da horta: " << endl;
 				cin >> nomeDaHorta;
-				cout << "introduza a nova area: " << endl;
+				cout << "Introduza a nova area: " << endl;
 				cin >> novaArea;
 				AlterarArea(plantacao, nomeDaHorta, novaArea, numeroHortas, &areasDiferentes, areasDisponiveis);
 			}
 		}
 
 		//ativar novo ciclo
-		if (input == "s")
+		else if (input == "s")
 		{
 			delete[] armazemTEMP;
 			armazemTEMP = new produto[tamanhoDoArmazem];
@@ -234,41 +255,7 @@ int main() {
 			}
 			Ciclo(&hortaCount, plantacao, &produtosNoArmazem, &produtosCount, &areasCount, &fornecedoresCount, armazem, &tamanhoDoArmazem, armazemTEMP, &areasDiferentes, areasDisponiveis);
 		}
-
-		// Testes
-		else if (input == "z") {
-			/*for (int i = 0; i < areasDiferentes; i++)
-			{
-				cout << areasDisponiveis[i] << endl;
-			}
-			for (int i = 0; i < hortaCount; i++)
-			{
-				cout << "Area: " << plantacao[i].area << "  | Horta " << plantacao[i].nome << " contem: " << endl;
-				for (int x = 0; x < plantacao[i].tamanho; x++)
-				{
-					cout << x + 1 << ". " << plantacao[i].zona[x].nome << " Resistencia: " << plantacao[i].zona[x].resistencia << endl;
-				}
-
-			}
-			cout << "Inventario do armazem:" << endl;
-			for (int i = 0; i < produtosNoArmazem; i++)
-			{
-				cout << i + 1 << ". " << armazem[i].nome << " | " << armazem[i].area << endl;
-			}
-			cin >> input;*/
-
-			cout << tamanhoDoArmazem << endl <<
-				produtosNoArmazem << endl <<
-				numeroHortas << endl <<
-				hortaCount << endl <<
-				areasCount << endl <<
-				produtosCount << endl <<
-				fornecedoresCount << endl <<
-				areasDiferentes << endl;
-			cin >> input;
-
-
-		}
+				
 
 		else if (input == "0") { // SAIR DO PROGRAMA
 			break;
@@ -309,6 +296,7 @@ void Ciclo(int* hortaCount, horta plantacao[], int* produtosNoArmazem, int* prod
 	}
 
 	//colheita de Produtos
+	system("cls");
 	cout << "Colheita de produtos" << endl;
 	for (int i = 0; i < *hortaCount; i++)
 	{
@@ -355,7 +343,7 @@ void Ciclo(int* hortaCount, horta plantacao[], int* produtosNoArmazem, int* prod
 	AdicionarProdutoAoArmazem(10, produtosNoArmazem, produtosCount, areasCount, fornecedoresCount, armazem, tamanhoDoArmazem, areasDiferentes, areasDisponiveis);
 
 	//Remoção de produtos (plantar)
-	cout << "remocao de produtos" << endl;
+	cout << "Remocao de produtos" << endl;
 	bool zonaDone = false;
 	for (int x = 0; x < *hortaCount; x++)
 	{
@@ -391,7 +379,7 @@ void Ciclo(int* hortaCount, horta plantacao[], int* produtosNoArmazem, int* prod
 	}
 
 	//pragas
-	cout << "pragas" << endl;
+	cout << "Pragas" << endl;
 
 	for (int i = 0; i < *hortaCount; i++)
 	{
@@ -402,7 +390,7 @@ void Ciclo(int* hortaCount, horta plantacao[], int* produtosNoArmazem, int* prod
 				int random = rand() % 100;
 				if (plantacao[i].zona[x].resistencia < random)
 				{
-					cout << "Uma produção foi perdida" << endl;
+					cout << "Uma produção de "<< plantacao[i].zona[x].nome << "na horta "<< plantacao[i] .nome<< " foi perdida!" << endl;
 					plantacao[i].zona[x].nome = "N/A";
 					plantacao[i].zona[x].duracao = 999;
 					plantacao[i].zona[x].fornecedores = "N/A";
@@ -412,6 +400,7 @@ void Ciclo(int* hortaCount, horta plantacao[], int* produtosNoArmazem, int* prod
 			}
 		}
 	}
+	cin >> input;
 }
 
 
