@@ -355,7 +355,7 @@ void Backlog(string agricultor, horta plantacao[], int numeroDeHortas) {
 			}
 		}
 	}
-	getline(cin, input);
+	cin >> input;
 }
 
 //Fuções Gerais
