@@ -8,13 +8,14 @@
 
 
 
+
 using namespace std;
 
 void Ciclo(int* hortaCount, horta plantacao[], int* produtosNoArmazem, int* produtosCount, int* areasCount, int* fornecedoresCount, produto armazem[], int* tamanhoDoArmazem, produto armazemTEMP[], int* areasDiferentes, string areasDisponiveis[]);
 
 int main() {
 
-
+	
 	srand(time(NULL));
 	string input;
 

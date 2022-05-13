@@ -6,6 +6,7 @@
 #include <string>
 #include <fstream>
 #include <Funcoes.h>
+#include <locale>
 
 using namespace std;
 
