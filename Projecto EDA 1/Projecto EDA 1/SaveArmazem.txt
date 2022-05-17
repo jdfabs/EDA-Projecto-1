@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 fennel 
 flower
 5
@@ -84,8 +85,58 @@ bud vegetables
 0
 66
 Galli Produce Inc
-3
+=======
+Tossa jute 
+bud vegetables
+4
+89
+Nacho's Wholesale Produce
+2
 
+wax gourd 
+bud vegetables
+5
+76
+Nacho's Wholesale Produce
+2
+
+rutabaga 
+seed vegetables
+1
+71
+West Central Produce
+2
+
+watercress 
+seed vegetables
+2
+90
+LA Produce Distributors
+5
+
+beet 
+seed vegetables
+4
+76
+Produce Services of Los Angeles
+2
+
+arugula 
+seed vegetables
+4
+63
+A and F Distributing Corp.
+4
+
+husk tomato 
+bud vegetables
+>>>>>>> Stashed changes
+3
+81
+Westlake produce company
+2
+
+<<<<<<< Updated upstream
 cassava 
 bud vegetables
 3
@@ -125,4 +176,12 @@ bud vegetables
 50
 Get Fresh Distributors Inc
 2
+=======
+water chestnut 
+seed vegetables
+4
+52
+A and F Distributing Corp.
+5
+>>>>>>> Stashed changes
 
