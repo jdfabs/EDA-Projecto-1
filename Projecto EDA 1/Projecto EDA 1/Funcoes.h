@@ -1,24 +1,44 @@
+#pragma once
 
-<<<<<<< Updated upstream
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
 #include <string>
 #include <fstream>
 #include <Funcoes.h>
-=======
-#include "structs.h"
->>>>>>> Stashed changes
 
 using namespace std;
 
+struct produto {
+	string nome = "N/A";
+	string area = "N/A";
+	int rega = 0;
+	int duracao = 0;
+	int resistencia = 0;
+	string fornecedores = "N/A";
+	int regaCooldown = 0;
+};
 
+struct horta {
+	char nome = 'Z';
+	string agricultor = "N/A";
+	string backlog[100];
+	produto zona[9];
+	int tamanho = 0;
+	string area = "N/A";
+	bool fertelizado = false;
+	int campanhaTempo = 0;
+};
 
 ifstream areas;
 ifstream produtos;
 ifstream fornecedores;
 string input;
 
+int Main() {
+
+	return 0;
+}
 
 //METODOS DE GESTÃO
 void ColheitaManual(string produtoQuery, horta plantacao[], int* hortasCount) {
@@ -36,9 +56,10 @@ void ColheitaManual(string produtoQuery, horta plantacao[], int* hortasCount) {
 						plantacao[i].backlog[y] = plantacao[i].zona[x].nome;
 						break;
 					}
-				}
+				}	
 				// muda os valores do produto para os default
-				plantacao[i].zona[x].nome = "N/A";
+				plantacao[i].zona[x].nome = "N/A";	
+				plantacao[i].zona[x].duracao = 999;
 				plantacao[i].zona[x].fornecedores = "N/A";
 				plantacao[i].zona[x].rega = 999;
 				plantacao[i].zona[x].resistencia = 100;
@@ -83,6 +104,7 @@ void Fertilizar(string area, int tempo, horta plantacao[], int* hortasCount) {
 	}
 }
 
+
 void ExportarHortas(int tamanhoDoArmazem, int produtosNoArmazem, int numeroHortas, int hortaCount, int areasCount, int produtosCount, int fornecedoresCount, int areasDiferentes, horta plantacao[], string areasDisponiveis[]) {
 	ofstream save;
 	save.open("Save.txt");
@@ -110,6 +132,7 @@ void ExportarHortas(int tamanhoDoArmazem, int produtosNoArmazem, int numeroHorta
 			save << plantacao[i].zona[x].nome << "\n"
 				<< plantacao[i].zona[x].area << "\n"
 				<< plantacao[i].zona[x].rega << "\n"
+				<< plantacao[i].zona[x].duracao << "\n"
 				<< plantacao[i].zona[x].resistencia << "\n"
 				<< plantacao[i].zona[x].fornecedores << "\n"
 				<< plantacao[i].zona[x].regaCooldown << "\n" << "\n";
@@ -138,6 +161,7 @@ void ExportarArmazem(int tamanhoDoArmazem, int produtosNoArmazem, produto armaze
 		save << armazem[i].nome << "\n"
 			<< armazem[i].area << "\n"
 			<< armazem[i].rega << "\n"
+			<< armazem[i].duracao << "\n"
 			<< armazem[i].resistencia << "\n"
 			<< armazem[i].fornecedores << "\n"
 			<< armazem[i].regaCooldown << "\n" << "\n";
@@ -200,6 +224,8 @@ void ImportHortas(int* tamanhoDoArmazem, int* produtosNoArmazem, int* numeroHort
 				getline(save, line);
 				plantacao[i].zona[x].rega = stoi(line);
 				getline(save, line);
+				plantacao[i].zona[x].duracao = stoi(line);
+				getline(save, line);
 				plantacao[i].zona[x].resistencia = stoi(line);
 				getline(save, line);
 				plantacao[i].zona[x].fornecedores = line;
@@ -243,6 +269,8 @@ void ImportArmazem(int* tamanhoDoArmazem, int* produtosNoArmazem, produto armaze
 			armazem[i].area = line;
 			getline(save, line);
 			armazem[i].rega = stoi(line);
+			getline(save, line);
+			armazem[i].duracao = stoi(line);
 			getline(save, line);
 			armazem[i].resistencia = stoi(line);
 			getline(save, line);
@@ -393,4 +421,3 @@ void CriarNovaHorta(int quantidade, int* numeroDeHortas, int* areasCount, int* p
 		cout << endl;
 	}
 }
-

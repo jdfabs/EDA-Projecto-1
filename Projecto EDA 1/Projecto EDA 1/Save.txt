@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 230
 16
 8
@@ -29,47 +28,16 @@ N/A
 0
 76
 Nacho's Wholesale Produce
-=======
-100
-8
-6
-6
-9
-100
-19
-6
-||Plantacao||
-A
-Jo�o
-7
-leaf
-0
-0
-
-
-N/A
-3
-86
-DLJ Produce Distributors
->>>>>>> Stashed changes
 3
 
 collard 
 N/A
-<<<<<<< Updated upstream
 2
-=======
-N/A
-999
-100
-N/A
->>>>>>> Stashed changes
 0
 63
 Ensenada Produce Distributors
 2
 
-<<<<<<< Updated upstream
 water chestnut 
 N/A
 5
@@ -99,53 +67,12 @@ N/A
 0
 0
 0
-=======
-lemongrass 
 N/A
-1
-50
-Get Fresh Distributors Inc
-1
-
-N/A
-N/A
-2
-73
-Ensenada Produce Distributors
 0
 
 N/A
 N/A
-4
-77
-Reyes Wholesale Produce
-2
-
->>>>>>> Stashed changes
-N/A
-N/A
-1
-77
-Produce Services of Los Angeles
-1
-
-N/A
-N/A
-<<<<<<< Updated upstream
 0
-0
-0
-N/A
-0
-=======
-2
-76
-West Central Produce
-2
->>>>>>> Stashed changes
-
-N/A
-N/A
 0
 0
 N/A
@@ -155,10 +82,10 @@ N/A
 N/A
 0
 0
+0
 N/A
 0
 
-<<<<<<< Updated upstream
 stinging nettle 
 Chinese water chestnut 
 Napa cabbage 
@@ -183,32 +110,6 @@ chicory
 zucchini 
 horseradish 
 lemongrass 
-=======
-shallot 
-salsify 
-kohlrabi 
-olive 
-radish 
-arugula 
-shallot 
-taro 
-tomato 
-jícama 
-kale 
-
-
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> Stashed changes
 
 
 
@@ -286,7 +187,6 @@ kale
 
 
 B
-<<<<<<< Updated upstream
 2
 4
 bud vegetables
@@ -294,39 +194,9 @@ bud vegetables
 0
 
 soybean 
-=======
-Andr�
-3
-flower
-0
-0
-
-beet 
 N/A
-3
-78
-The SF Market (San Francisco Wholesale Produce Market)
-3
-
-breadfruit 
->>>>>>> Stashed changes
-N/A
-2
-51
-breadfruit 
 1
-
-musk cucumber 
-N/A
-3
-71
-Primo Growers And Distributors
-2
-
-N/A
-N/A
 0
-<<<<<<< Updated upstream
 57
 M&M Farms Inc.
 1
@@ -353,34 +223,11 @@ N/A
 999
 100
 N/A
-=======
-0
-N/A
 0
 
 N/A
 N/A
 0
-0
-N/A
->>>>>>> Stashed changes
-0
-
-N/A
-N/A
-<<<<<<< Updated upstream
-0
-=======
->>>>>>> Stashed changes
-0
-0
-N/A
-0
-
-N/A
-N/A
-0
-<<<<<<< Updated upstream
 0
 0
 N/A
@@ -392,16 +239,21 @@ N/A
 0
 0
 N/A
-=======
-0
-N/A
->>>>>>> Stashed changes
 0
 
 N/A
 N/A
 0
 0
+0
+N/A
+0
+
+N/A
+N/A
+0
+0
+0
 N/A
 0
 
@@ -409,10 +261,10 @@ N/A
 N/A
 0
 0
+0
 N/A
 0
 
-<<<<<<< Updated upstream
 chive 
 bell pepper 
 tomatillo 
@@ -434,29 +286,6 @@ jícama
 amaranth 
 pepper 
 kohlrabi 
-=======
-rutabaga 
-moringa 
-chayote 
-kohlrabi 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> Stashed changes
 
 
 
@@ -537,7 +366,6 @@ kohlrabi
 
 
 C
-<<<<<<< Updated upstream
 3
 4
 bud vegetables
@@ -567,75 +395,18 @@ N/A
 79
 LA Produce Distributors
 3
-=======
-Tiago
-6
-flower
-0
-0
-
-amaranth 
-N/A
-4
-82
-Reyes Wholesale Produce
-4
-
-water chestnut 
-N/A
-2
-85
-Primo Growers And Distributors
-2
-
-lima bean 
-N/A
-4
-89
-Alliance Produce Distributors
-3
-
-shallot 
-N/A
-1
-97
-California Green Distributor, Inc
-1
->>>>>>> Stashed changes
 
 collard 
 N/A
-<<<<<<< Updated upstream
 1
 0
 90
 Ensenada Produce Distributors
 0
-=======
-3
-81
-Galli Produce Inc
-3
->>>>>>> Stashed changes
-
-corn 
-N/A
-<<<<<<< Updated upstream
-N/A
-0
-0
-0
-N/A
-0
-=======
-1
-77
-S and L Wholesale Produce
-1
->>>>>>> Stashed changes
 
 N/A
 N/A
+0
 0
 0
 N/A
@@ -645,6 +416,15 @@ N/A
 N/A
 0
 0
+0
+N/A
+0
+
+N/A
+N/A
+0
+0
+0
 N/A
 0
 
@@ -652,10 +432,10 @@ N/A
 N/A
 0
 0
+0
 N/A
 0
 
-<<<<<<< Updated upstream
 N/A
 N/A
 0
@@ -681,25 +461,6 @@ zucchini
 sweet potato 
 wax gourd 
 peanut 
-=======
-lettuce 
-lima bean 
-pepper 
-rutabaga 
-musk cucumber 
-beet 
-squash blossoms 
-beet 
-tomato 
-
-
-
-
-
-
-
-
->>>>>>> Stashed changes
 
 
 
@@ -784,7 +545,6 @@ tomato
 
 
 D
-<<<<<<< Updated upstream
 4
 7
 seed vegetables
@@ -802,25 +562,11 @@ The SF Market (San Francisco Wholesale Produce Market)
 N/A
 N/A
 5
-=======
-Rui
-7
-flower
-0
-0
-
-leek 
-N/A
-5
-76
-California Green Distributor, Inc
->>>>>>> Stashed changes
 0
 93
 DLJ Produce Distributors
 4
 
-<<<<<<< Updated upstream
 chard 
 N/A
 1
@@ -828,18 +574,9 @@ N/A
 78
 Primo Growers And Distributors
 0
-=======
-jícama 
-N/A
-2
-76
-Galli Produce Inc
-2
->>>>>>> Stashed changes
 
 beet 
 N/A
-<<<<<<< Updated upstream
 2
 0
 76
@@ -861,65 +598,31 @@ N/A
 90
 kohlrabi 
 2
-=======
-N/A
-1
-67
-M&M Farms Inc.
-1
 
 N/A
 N/A
-1
-66
-Reyes Wholesale Produce
-0
-
-N/A
-N/A
-1
-84
-DLJ Produce Distributors
-1
->>>>>>> Stashed changes
-
-lentil 
-N/A
-4
-74
-M&M Farms Inc.
-4
-
-lima bean 
-N/A
-<<<<<<< Updated upstream
 2
 0
 56
 Mountain Produce
 2
-=======
-3
-72
-Reyes Wholesale Produce
-3
->>>>>>> Stashed changes
 
 N/A
 N/A
 0
 0
-N/A
-0
-
-N/A
-N/A
-0
 0
 N/A
 0
 
-<<<<<<< Updated upstream
+N/A
+N/A
+0
+0
+0
+N/A
+0
+
 Jerusalem artichoke 
 tomato 
 chicory 
@@ -940,28 +643,6 @@ borage
 lotus 
 kohlrabi 
 spinach 
-=======
-grape leaves 
-lima bean 
-celery 
-Tossa jute 
-squash blossoms 
-broccoli 
-tomatillo 
-parsnip 
-borage 
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> Stashed changes
 
 
 
@@ -1043,7 +724,6 @@ borage
 
 
 E
-<<<<<<< Updated upstream
 5
 7
 bulb
@@ -1105,89 +785,23 @@ N/A
 0
 N/A
 0
-=======
-Marco
-8
-seed vegetables
-0
-0
-
-loofah 
-N/A
-1
-96
-S and L Wholesale Produce
-1
-
-cardoon 
-N/A
-4
-81
-Produce Services of Los Angeles
-3
-
-mustard 
-N/A
-1
-96
-Primo Growers And Distributors
-1
-
-bamboo 
-N/A
-2
-76
-bamboo 
-0
-
-okra 
-N/A
-3
-69
-okra 
-3
-
-watercress 
-N/A
-4
-92
-M&M Farms Inc.
-0
-
-bok choy 
-N/A
-5
-58
-S and L Wholesale Produce
-5
-
-
-N/A
-5
-95
-Nacho's Wholesale Produce
-3
->>>>>>> Stashed changes
 
 N/A
 N/A
 0
 0
+0
 N/A
 0
 
-chicory 
-grape leaves 
-asparagus 
-cassava 
-cassava 
-caper 
+N/A
+N/A
+0
+0
+0
+N/A
+0
 
-
-
-
-
-<<<<<<< Updated upstream
 musk cucumber 
 artichoke 
 okra 
@@ -1199,8 +813,6 @@ common bean
 stinging nettle 
 rutabaga 
 sweet potato 
-=======
->>>>>>> Stashed changes
 
 
 
@@ -1291,13 +903,8 @@ sweet potato
 
 
 F
-<<<<<<< Updated upstream
 6
 3
-=======
-Bruno
-5
->>>>>>> Stashed changes
 bud vegetables
 0
 0
@@ -1312,7 +919,6 @@ Reyes Wholesale Produce
 
 durian 
 N/A
-<<<<<<< Updated upstream
 5
 0
 99
@@ -1333,51 +939,11 @@ N/A
 0
 0
 N/A
-=======
-999
-100
-N/A
 0
 
-beet 
 N/A
-2
-61
-DLJ Produce Distributors
->>>>>>> Stashed changes
-0
-
-watercress 
-N/A
-2
-87
-Primo Growers And Distributors
-2
-
-durian 
-N/A
-<<<<<<< Updated upstream
-0
-0
-0
 N/A
 0
-=======
-2
-73
-Primo Growers And Distributors
-1
-
-olive 
-N/A
-3
-69
-olive 
-1
->>>>>>> Stashed changes
-
-N/A
-N/A
 0
 0
 N/A
@@ -1387,12 +953,6 @@ N/A
 N/A
 0
 0
-N/A
-0
-
-N/A
-N/A
-0
 0
 N/A
 0
@@ -1401,10 +961,26 @@ N/A
 N/A
 0
 0
+0
 N/A
 0
 
-<<<<<<< Updated upstream
+N/A
+N/A
+0
+0
+0
+N/A
+0
+
+N/A
+N/A
+0
+0
+0
+N/A
+0
+
 pepper 
 celeriac 
 common bean 
@@ -1418,12 +994,6 @@ Tossa jute
 
 
 
-=======
-chard 
-kohlrabi 
-chayote 
-lemongrass 
->>>>>>> Stashed changes
 
 
 
@@ -1511,7 +1081,6 @@ lemongrass
 
 
 
-<<<<<<< Updated upstream
 G
 7
 4
@@ -1520,36 +1089,12 @@ flower
 0
 
 jackfruit 
-=======
-
-
-
-
-
-
-
-
-
-Z
 N/A
+3
 0
-N/A
-0
-0
-
->>>>>>> Stashed changes
-N/A
-N/A
-0
-<<<<<<< Updated upstream
 90
 California Green Distributor, Inc
 2
-=======
-0
-N/A
-0
->>>>>>> Stashed changes
 
 tomato 
 N/A
@@ -1561,7 +1106,6 @@ Produce Services of Los Angeles
 
 broccoli 
 N/A
-<<<<<<< Updated upstream
 1
 0
 79
@@ -1574,7 +1118,11 @@ N/A
 0
 86
 The SF Market (San Francisco Wholesale Produce Market)
-=======
+0
+
+N/A
+N/A
+0
 0
 0
 N/A
@@ -1584,34 +1132,13 @@ N/A
 N/A
 0
 0
-N/A
->>>>>>> Stashed changes
-0
-
-N/A
-N/A
-0
-0
-<<<<<<< Updated upstream
-0
-=======
->>>>>>> Stashed changes
-N/A
-0
-
-N/A
-N/A
-0
-<<<<<<< Updated upstream
-0
-=======
->>>>>>> Stashed changes
 0
 N/A
 0
 
 N/A
 N/A
+0
 0
 0
 N/A
@@ -1621,12 +1148,6 @@ N/A
 N/A
 0
 0
-N/A
-0
-
-N/A
-N/A
-0
 0
 N/A
 0
@@ -1635,10 +1156,10 @@ N/A
 N/A
 0
 0
+0
 N/A
 0
 
-<<<<<<< Updated upstream
 turnip 
 broad bean 
 lamb’s quarters 
@@ -1656,25 +1177,6 @@ lettuce
 green bean
 cassava 
 artichoke 
-=======
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> Stashed changes
 
 
 
@@ -1767,29 +1269,15 @@ root
 
 Brussels sprouts 
 N/A
-<<<<<<< Updated upstream
 1
 0
 75
 Produce Services of Los Angeles
-=======
-N/A
-0
-0
-N/A
->>>>>>> Stashed changes
 0
 
 radish 
 N/A
-<<<<<<< Updated upstream
 3
-=======
-N/A
-0
-0
-N/A
->>>>>>> Stashed changes
 0
 69
 Westlake produce company
@@ -1797,14 +1285,7 @@ Westlake produce company
 
 wax gourd 
 N/A
-<<<<<<< Updated upstream
 5
-=======
-N/A
-0
-0
-N/A
->>>>>>> Stashed changes
 0
 85
 Primo Growers And Distributors
@@ -1812,14 +1293,7 @@ Primo Growers And Distributors
 
 Brussels sprouts 
 N/A
-<<<<<<< Updated upstream
 4
-=======
-N/A
-0
-0
-N/A
->>>>>>> Stashed changes
 0
 90
 M&M Farms Inc.
@@ -1827,14 +1301,7 @@ M&M Farms Inc.
 
 tomato 
 N/A
-<<<<<<< Updated upstream
 1
-=======
-N/A
-0
-0
-N/A
->>>>>>> Stashed changes
 0
 75
 tomato 
@@ -1844,12 +1311,6 @@ N/A
 N/A
 0
 0
-N/A
-0
-
-N/A
-N/A
-0
 0
 N/A
 0
@@ -1858,11 +1319,21 @@ N/A
 N/A
 0
 0
+0
 N/A
 0
 
 N/A
 N/A
+0
+0
+0
+N/A
+0
+
+N/A
+N/A
+0
 0
 0
 N/A
@@ -1979,12 +1450,6 @@ N/A
 N/A
 0
 0
-N/A
-0
-
-N/A
-N/A
-0
 0
 N/A
 0
@@ -1992,12 +1457,6 @@ N/A
 N/A
 N/A
 0
-0
-N/A
-0
-
-N/A
-N/A
 0
 0
 N/A
@@ -2007,12 +1466,6 @@ N/A
 N/A
 0
 0
-N/A
-0
-
-N/A
-N/A
-0
 0
 N/A
 0
@@ -2021,6 +1474,15 @@ N/A
 N/A
 0
 0
+0
+N/A
+0
+
+N/A
+N/A
+0
+0
+0
 N/A
 0
 
@@ -2028,11 +1490,29 @@ N/A
 N/A
 0
 0
+0
 N/A
 0
 
 N/A
 N/A
+0
+0
+0
+N/A
+0
+
+N/A
+N/A
+0
+0
+0
+N/A
+0
+
+N/A
+N/A
+0
 0
 0
 N/A
@@ -2149,18 +1629,13 @@ N/A
 N/A
 0
 0
-N/A
-0
-
-N/A
-N/A
-0
 0
 N/A
 0
 
 N/A
 N/A
+0
 0
 0
 N/A
@@ -2170,18 +1645,13 @@ N/A
 N/A
 0
 0
-N/A
-0
-
-N/A
-N/A
-0
 0
 N/A
 0
 
 N/A
 N/A
+0
 0
 0
 N/A
@@ -2191,12 +1661,6 @@ N/A
 N/A
 0
 0
-N/A
-0
-
-N/A
-N/A
-0
 0
 N/A
 0
@@ -2205,6 +1669,31 @@ N/A
 N/A
 0
 0
+0
+N/A
+0
+
+N/A
+N/A
+0
+0
+0
+N/A
+0
+
+N/A
+N/A
+0
+0
+0
+N/A
+0
+
+N/A
+N/A
+0
+0
+0
 N/A
 0
 
@@ -2308,7 +1797,6 @@ N/A
 
 
 
-<<<<<<< Updated upstream
 bulb
 bud vegetables
 bud vegetables
@@ -2317,16 +1805,6 @@ bulb
 bud vegetables
 flower
 root
-=======
-leaf
-flower
-flower
-flower
-seed vegetables
-bud vegetables
-
-
->>>>>>> Stashed changes
 
 
 
