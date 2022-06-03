@@ -46,7 +46,7 @@ bamboo
 beet 
 bok choy 
 borage 
-Brussels sprouts 
+brussels sprouts 
 burdock 
 cabbage 
 cardoon 
@@ -58,7 +58,7 @@ collard
 endive 
 fennel 
 grape leaves 
-Indian fig 
+indian fig 
 kale 
 kohlrabi 
 lamb’s lettuce 
@@ -69,21 +69,21 @@ lettuce
 lotus 
 moringa 
 mustard 
-Napa cabbage 
+napa cabbage 
 sorrel 
 spinach 
 stinging nettle 
-Tossa jute 
+tossa jute 
 watercress 
 beet 
 carrot 
 cassava 
 celeriac 
-Chinese water chestnut 
+chinese water chestnut 
 garlic 
 ginger 
 horseradish 
-Jerusalem artichoke 
+jerusalem artichoke 
 jícama 
 lotus 
 onion 

@@ -1,128 +1,24 @@
-fennel 
-flower
-5
-0
-62
-Mountain Produce
-5
-
-breadfruit 
-flower
-4
-0
-89
-Alliance Produce Distributors
-1
-
-ginger 
-flower
-1
-0
-83
-Ensenada Produce Distributors
+lamb’s quarters 
+leaf
 3
+0
+49
+Reyes Wholesale Produce
+5
 
 chickpea 
-flower
+leaf
 3
-0
-74
-A and F Distributing Corp.
-4
-
-garlic 
-flower
-5
-0
-70
-A and F Distributing Corp.
-1
-
-caper 
-flower
-5
-0
-84
-California Green Distributor, Inc
-5
-
-mustard 
-bud vegetables
-1
-0
-83
-Alliance Produce Distributors
-3
-
-salsify 
-bud vegetables
-3
-0
-62
-Produce Services of Los Angeles
-1
-
-shallot 
-bud vegetables
-2
-0
-56
-West Central Produce
-3
-
-onion 
-flower
-5
-0
-94
-A and F Distributing Corp.
-5
-
-Chinese water chestnut 
-bud vegetables
-2
 0
 66
-Galli Produce Inc
-3
+chickpea 
+2
 
-cassava 
-bud vegetables
-3
-0
-78
-Westlake produce company
+chickpea 
+
 1
-
-kohlrabi 
-bud vegetables
-4
 0
-72
-LA Produce Distributors
+93
+Reyes Wholesale Produce
 5
-
-
-bud vegetables
-5
-0
-63
-The SF Market (San Francisco Wholesale Produce Market)
-3
-
-cucumber 
-bud vegetables
-5
-0
-61
-M&M Farms Inc.
-2
-
-ti 
-bud vegetables
-5
-0
-50
-Get Fresh Distributors Inc
-2
 

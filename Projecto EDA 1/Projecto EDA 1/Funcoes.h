@@ -9,6 +9,8 @@
 
 using namespace std;
 
+
+
 struct produto {
 	string nome = "N/A";
 	string area = "N/A";
@@ -19,26 +21,74 @@ struct produto {
 	int regaCooldown = 0;
 };
 
+struct backLogNode {
+	string nomeProduto;
+	backLogNode* anterior;
+	backLogNode* seguinte;
+};
+
 struct horta {
 	char nome = 'Z';
 	string agricultor = "N/A";
-	string backlog[100];
 	produto zona[9];
 	int tamanho = 0;
 	string area = "N/A";
 	bool fertelizado = false;
 	int campanhaTempo = 0;
+	backLogNode* raizBackLog = NULL;
+
 };
+
+
 
 ifstream areas;
 ifstream produtos;
 ifstream fornecedores;
 string input;
 
-int Main() {
 
-	return 0;
+backLogNode* NovoNode(produto produto) {
+	backLogNode* novoBackLog = new backLogNode();
+	(*novoBackLog).nomeProduto = produto.nome;
+	(*novoBackLog).anterior = NULL;
+	(*novoBackLog).seguinte = NULL;
+	return novoBackLog;
 }
+
+
+
+backLogNode* InserirBackLog(backLogNode* raizBackLog, produto produto) {
+	if (raizBackLog == NULL) {
+		raizBackLog = NovoNode(produto);
+
+	}
+	else if (produto.nome[0] < raizBackLog->nomeProduto[0]) {
+		raizBackLog->anterior = InserirBackLog(raizBackLog->anterior, produto);
+	}
+	else if (produto.nome[0] > raizBackLog->nomeProduto[0]) {
+		raizBackLog->seguinte = InserirBackLog(raizBackLog->seguinte, produto);
+	}
+	else {
+		if (produto.nome[1] < raizBackLog->nomeProduto[1]) {
+			raizBackLog->anterior = InserirBackLog(raizBackLog->anterior, produto);
+		}
+		else if (produto.nome[1] > raizBackLog->nomeProduto[1]) {
+			raizBackLog->seguinte = InserirBackLog(raizBackLog->seguinte, produto);
+		}
+		else
+		{
+			if (produto.nome[2] < raizBackLog->nomeProduto[2]) {
+				raizBackLog->anterior = InserirBackLog(raizBackLog->anterior, produto);
+			}
+			else if (produto.nome[2] > raizBackLog->nomeProduto[2]) {
+				raizBackLog->seguinte = InserirBackLog(raizBackLog->seguinte, produto);
+			}
+		}
+	}
+	return raizBackLog;
+
+}
+
 
 //METODOS DE GESTÃO
 void ColheitaManual(string produtoQuery, horta plantacao[], int* hortasCount) {
@@ -50,23 +100,24 @@ void ColheitaManual(string produtoQuery, horta plantacao[], int* hortasCount) {
 			if (plantacao[i].zona[x].nome == produtoQuery)
 			{
 				cout << "produto encontrado - a remover" << endl;
-				for (int y = 0; y < 100; y++) //adiciona o produto ao backlog
-				{
-					if (plantacao[i].backlog[y] == "") {
-						plantacao[i].backlog[y] = plantacao[i].zona[x].nome;
-						break;
-					}
-				}	
-				// muda os valores do produto para os default
-				plantacao[i].zona[x].nome = "N/A";	
-				plantacao[i].zona[x].duracao = 999;
-				plantacao[i].zona[x].fornecedores = "N/A";
-				plantacao[i].zona[x].rega = 999;
-				plantacao[i].zona[x].resistencia = 100;
+				//adiciona o produto ao backlog
+
+				InserirBackLog(plantacao[i].raizBackLog, plantacao[i].zona[x]);
+				/*if (plantacao[i].backlog[y] == "") {
+					plantacao[i].backlog[y] = plantacao[i].zona[x].nome;
+					break;
+			}*/
 			}
+			// muda os valores do produto para os default
+			plantacao[i].zona[x].nome = "N/A";
+			plantacao[i].zona[x].duracao = 999;
+			plantacao[i].zona[x].fornecedores = "N/A";
+			plantacao[i].zona[x].rega = 999;
+			plantacao[i].zona[x].resistencia = 100;
 		}
 	}
 }
+
 
 void AtualizarRega(string produtoQuery, int tempo, horta plantacao[], int* hortasCount, produto armazem[], int* produtosNoArmazem, int* tamanhoDoArmazem) {
 	produtoQuery = produtoQuery + " ";
@@ -104,7 +155,6 @@ void Fertilizar(string area, int tempo, horta plantacao[], int* hortasCount) {
 	}
 }
 
-
 void ExportarHortas(int tamanhoDoArmazem, int produtosNoArmazem, int numeroHortas, int hortaCount, int areasCount, int produtosCount, int fornecedoresCount, int areasDiferentes, horta plantacao[], string areasDisponiveis[]) {
 	ofstream save;
 	save.open("Save.txt");
@@ -138,10 +188,10 @@ void ExportarHortas(int tamanhoDoArmazem, int produtosNoArmazem, int numeroHorta
 				<< plantacao[i].zona[x].regaCooldown << "\n" << "\n";
 		}
 		//gravar backlog
-		for (int x = 0; x < 100; x++)
+		/*for (int x = 0; x < 100; x++)
 		{
-			save << plantacao[i].backlog[x] << "\n";
-		}
+			//save << plantacao[i].backlog[x] << "\n";
+		}*/
 
 	}
 	//guardar as areas existentes
@@ -168,6 +218,57 @@ void ExportarArmazem(int tamanhoDoArmazem, int produtosNoArmazem, produto armaze
 	}
 	save.close();
 }
+void ExportarBackLogPragas(backLogNode* backLogPragas) {
+	ofstream save;
+	save.open("SavePragasBacklog.txt", std::ios::app); //abre no final do ficheiro
+	if (backLogPragas != NULL)
+	{
+		if (backLogPragas->anterior != NULL) {
+			ExportarBackLogPragas(backLogPragas->anterior);
+		}
+		save << backLogPragas->nomeProduto << endl;
+		if (backLogPragas->seguinte != NULL) {
+			ExportarBackLogPragas(backLogPragas->seguinte);
+		}
+
+	}
+	save.close();
+
+}
+
+void ExportarBackLogHorta(backLogNode* backLog, string nomeFicheiro) {
+	ofstream save;
+	save.open(nomeFicheiro, std::ios::app); //abre no final do ficheiro
+	if (backLog != NULL)
+	{
+		if (backLog->anterior != NULL) {
+			ExportarBackLogHorta(backLog->anterior, nomeFicheiro);
+		}
+		save << backLog->nomeProduto << endl;
+		if (backLog->seguinte != NULL) {
+			ExportarBackLogHorta(backLog->seguinte, nomeFicheiro);
+		}
+
+	}
+	save.close();
+}
+void ExportarBackLogHortas(horta plantacao[], int hortaCount) {
+	ofstream save;
+	string nomeFicheiro;
+	for (int i = 0; i < hortaCount; i++)
+	{
+		nomeFicheiro = "SaveBackLogHorta";
+		nomeFicheiro.append(to_string(i));
+		nomeFicheiro.append(".txt");
+		save.open(nomeFicheiro);
+		save << ""; //abre backlog das pragas e "apaga o conteudo" 
+		ExportarBackLogHorta(plantacao[i].raizBackLog, nomeFicheiro);
+		save.close();
+	}
+}
+
+
+
 
 void ImportHortas(int* tamanhoDoArmazem, int* produtosNoArmazem, int* numeroHortas, int* hortaCount, int* areasCount, int* produtosCount, int* fornecedoresCount, int* areasDiferentes, horta plantacao[], string areasDisponiveis[]) {
 
@@ -235,12 +336,12 @@ void ImportHortas(int* tamanhoDoArmazem, int* produtosNoArmazem, int* numeroHort
 			}
 			getline(save, line);
 			//importar o backlog
-			for (int y = 0; y < 100; y++)
+			/*for (int y = 0; y < 100; y++)
 			{
 
 				getline(save, line);
-				plantacao[i].backlog[y] = line;
-			}
+				//plantacao[i].backlog[y] = line;
+			}*/
 
 		}
 		//importar areas existentes
@@ -282,6 +383,63 @@ void ImportArmazem(int* tamanhoDoArmazem, int* produtosNoArmazem, produto armaze
 		}
 		save.close();
 	}
+}
+void ImportarBackLogPragas(backLogNode** backLogPragas) {
+	ifstream save;
+	int linhasCount = 0;
+	string line;
+	save.open("SavePragasBacklog.txt");
+	produto novoProduto;
+
+	if (save.is_open()) {
+
+		while (getline(save, line)) {
+			linhasCount++;
+		}
+		save.close();
+	}
+	save.open("SavePragasBacklog.txt"); //refresh ficheiro
+	for (int i = 0; i < linhasCount; i++)
+	{
+
+		getline(save, line);
+		novoProduto.nome = line;
+		*backLogPragas = InserirBackLog(*backLogPragas, novoProduto);
+	}
+	save.close();
+}
+
+void ImportarBackLogHorta(backLogNode** backLogRaiz, int hortasCount, int numeroDestaHorta) {
+
+	ifstream save;
+	int linhasCount = 0;
+	string nomeFicheiro;
+	string line;
+	produto novoProduto;
+
+	nomeFicheiro = "SaveBackLogHorta";
+	nomeFicheiro.append(to_string(numeroDestaHorta));
+	nomeFicheiro.append(".txt");
+	save.open(nomeFicheiro);
+	linhasCount = 0;
+	if (save.is_open()) {
+
+		while (getline(save, line)) {
+			linhasCount++;
+		}
+		save.close();
+		save.open(nomeFicheiro); //refresh ficheiro
+	}
+	for (int x = 0; x < linhasCount; x++)
+	{
+
+		getline(save, line);
+		novoProduto.nome = line;
+
+		*backLogRaiz = InserirBackLog(*backLogRaiz, novoProduto);
+	}
+	save.close();
+
 }
 
 void PrintProducts(horta plantacao[], int* hortasCount, produto armazem[], int* produtosNoArmazem, int* tamanhoDoArmazem) { // 0 para ordem alfabetica e 1 para tempo de plantação (não implementado)
@@ -340,22 +498,49 @@ void AlterarArea(horta plantacao[], char nome, string area, int numeroDeHortas, 
 	}
 }
 
-void Backlog(string agricultor, horta plantacao[], int numeroDeHortas) {
+
+
+void PrintInOrder(backLogNode* Ptr) {
+
+	if (Ptr->anterior != NULL) {
+		PrintInOrder(Ptr->anterior);
+	}
+	cout << Ptr->nomeProduto << endl;
+	if (Ptr->seguinte != NULL) {
+		PrintInOrder(Ptr->seguinte);
+	}
+}
+
+void BacklogPragas(backLogNode* backLogPragas) {
 	string input;
+	if (backLogPragas != NULL) {
+		PrintInOrder(backLogPragas);
+	}
+	else {
+		cout << "Nada Perdido" << endl;
+	}
+	cin >> input;
+}
+
+void Backlog(char nome, horta plantacao[], int numeroDeHortas) {
+	string input;
+	backLogNode raiz;
+
 	for (int i = 0; i < numeroDeHortas; i++)
 	{
-		if (plantacao[i].agricultor == agricultor)
+		if (plantacao[i].nome == nome)
 		{
-			for (int x = 0; x < 100; x++)
+			if (plantacao[i].raizBackLog != NULL)
 			{
-				if (plantacao[i].backlog[x] != "")
-				{
-					cout << x + 1 << ". " << plantacao[i].backlog[x] << endl;
-				}
+				PrintInOrder(plantacao[i].raizBackLog);
+			}
+			else
+			{
+				cout << "Nada Plantado" << endl;
 			}
 		}
 	}
-	getline(cin, input);
+	cin >> input;
 }
 
 //Fuções Gerais
@@ -387,7 +572,7 @@ void AdicionarProdutoAoArmazem(int quantidade, int* produtosNoArmazem, int* prod
 		armazem[i + *produtosNoArmazem].fornecedores = line;
 		armazem[i + *produtosNoArmazem].rega = rand() % 5 + 1;
 		armazem[i + *produtosNoArmazem].regaCooldown = armazem[i + *produtosNoArmazem].rega;
-		armazem[i + *produtosNoArmazem].resistencia = rand() % 50 + 50;
+		armazem[i + *produtosNoArmazem].resistencia = rand() % 80 + 20;
 	}
 	*produtosNoArmazem = *produtosNoArmazem + quantidade;
 }
@@ -421,3 +606,6 @@ void CriarNovaHorta(int quantidade, int* numeroDeHortas, int* areasCount, int* p
 		cout << endl;
 	}
 }
+
+
+
