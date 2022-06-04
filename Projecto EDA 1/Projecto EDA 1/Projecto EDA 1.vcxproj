@@ -116,7 +116,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>F:\GitHub repos\EDA-Projecto-1\Projecto EDA 1\Projecto EDA 1</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\HDD\GitHub\EDA-Projecto-1\Projecto EDA 1</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

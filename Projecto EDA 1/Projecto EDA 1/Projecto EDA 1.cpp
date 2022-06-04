@@ -15,6 +15,8 @@ void Ciclo(int* hortaCount, horta plantacao[], int* produtosNoArmazem, int* prod
 int main() {
 
 	backLogNode* backLogPragas = NULL;
+	backLogNode* produtosPlantados = NULL;
+	backLogNode* produtosArmazem = NULL;
 
 	srand(time(NULL));
 	string input;
@@ -143,11 +145,12 @@ int main() {
 			cout << "(3).Fertilização" << endl;
 			cout << "(4).Gravar Plantação" << endl;
 			cout << "(5).Carregar Plantação" << endl;
-			cout << "(6).Imprimir Plantação" << endl;
+			cout << "(6).Imprimir produtos (hortas e armazem) por ordem alfabética" << endl;
 			cout << "(7).Criar nova área" << endl;
 			cout << "(8).Mostrar registo de horta" << endl;
 			cout << "(9).Alterar área" << endl;
 			cout << "(10).Mostrar registo de Pragas" << endl;
+			cout << "(11).Mostrar plantação" << endl;
 			cout << "(0).Voltar" << endl;
 			cout << "Seleccione a sua opção :" << endl;
 			cin >> input;
@@ -223,7 +226,8 @@ int main() {
 			//Imprimir Plantação
 			if (input == "6") {
 				system("cls");
-				PrintProducts(plantacao, &hortaCount, armazem, &produtosNoArmazem, &tamanhoDoArmazem);
+				ImprimirProdutosPlantados(plantacao, hortaCount, &produtosPlantados);
+				ImprimirProdutosArmazem(armazem, produtosNoArmazem, &produtosArmazem);
 			}
 
 			//Criar nova área
@@ -259,7 +263,12 @@ int main() {
 			if (input == "10") {
 				system("cls");
 				cout << "Backlog das pragas:" << endl;
-				BacklogPragas(backLogPragas);
+				BacklogAlfabetico(backLogPragas);
+			}
+
+			if (input == "11") {
+				system("cls");
+				PrintProducts(plantacao, &hortaCount, armazem, &produtosNoArmazem, &tamanhoDoArmazem);
 			}
 		}
 

@@ -5,7 +5,6 @@
 #include <time.h>
 #include <string>
 #include <fstream>
-#include <Funcoes.h>
 
 using namespace std;
 
@@ -510,13 +509,13 @@ void ImprimirOrdenadamente(backLogNode* raiz) {
 	}
 }
 
-void BacklogPragas(backLogNode* backLogPragas) {
+void BacklogAlfabetico(backLogNode* backLogPragas) {
 	string input;
 	if (backLogPragas != NULL) {
 		ImprimirOrdenadamente(backLogPragas);
 	}
 	else {
-		cout << "Nada Perdido" << endl;
+		cout << "Sem dados" << endl;
 	}
 	cin >> input;
 }
@@ -606,5 +605,34 @@ void CriarNovaHorta(int quantidade, int* numeroDeHortas, int* areasCount, int* p
 	}
 }
 
+void ImprimirProdutosPlantados(horta plantacao[], int hortasCount, backLogNode** produtos) { // 0 para ordem alfabetica e 1 para tempo de plantação (não implementado)
+	system("cls");
+	*produtos = NULL;
+	cout << "Produtos plantados nas hortas:" << endl;
+	for (int i = 0; i < hortasCount; i++)
+	{
+		for (int x = 0; x < plantacao[i].tamanho; x++)
+		{
+			if (plantacao[i].zona[x].nome != "N/A") {
+				*produtos = InserirBackLog(*produtos, plantacao[i].zona[x]);
+			}
+		}
+	}
+	BacklogAlfabetico(*produtos);
+	cout << "-----------------------" << endl;
+
+}
+
+void ImprimirProdutosArmazem(produto armazem[], int produtosCount, backLogNode** produtosArmazem) {
+	*produtosArmazem = NULL;
+	cout << "Produtos no armazem:" << endl;
+	for (int i = 0; i < produtosCount; i++) {
+		*produtosArmazem = InserirBackLog(*produtosArmazem, armazem[i]);
+	}
+	BacklogAlfabetico(*produtosArmazem);
+
+	string input;
+	cin >> input;
+}
 
 
