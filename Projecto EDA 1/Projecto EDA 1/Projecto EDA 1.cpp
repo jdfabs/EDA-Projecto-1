@@ -193,11 +193,8 @@ int main() {
 				ExportarArmazem(tamanhoDoArmazem, produtosNoArmazem, armazem);
 				ofstream save;
 				save.open("SavePragasBacklog.txt"); 
-				save << ""; //abre backlog das pragas e "apaga o conteudo" 
-
-
+				save << ""; //abre backlog das pragas e "apaga o conteudo"
 				ExportarBackLogPragas(backLogPragas);
-
 				ExportarBackLogHortas(plantacao, hortaCount);
 				cin >> input;
 			}
@@ -215,7 +212,7 @@ int main() {
 
 				ImportArmazem(&tamanhoDoArmazem, &produtosNoArmazem, armazem);
 				ImportarBackLogPragas(&backLogPragas);
-				for (int i = 0; i < hortaCount; i++)
+				for (int i = 0; i < hortaCount; i++) //importar backlog para cada horta
 				{
 					ImportarBackLogHorta(&plantacao[i].raizBackLog, hortaCount, i);
 				}
@@ -334,15 +331,13 @@ void Ciclo(int* hortaCount, horta plantacao[], int* produtosNoArmazem, int* prod
 			if (random == 3 && plantacao[i].zona[x].nome != "N/A") {
 
 				plantacao[i].raizBackLog = InserirBackLog(plantacao[i].raizBackLog, plantacao[i].zona[x]);
-				/*if (plantacao[i].backlog[y] == "") {
+				/*if (plantacao[i].backlog[y] == "") {		//Backlog da horta antigo
 					plantacao[i].backlog[y] = plantacao[i].zona[x].nome;
 					break;
 				}*/
-
 				plantacao[i].zona[x].nome = "N/A";
 			}
 		}
-
 	}
 
 	//Rega
@@ -418,14 +413,13 @@ void Ciclo(int* hortaCount, horta plantacao[], int* produtosNoArmazem, int* prod
 				int random = rand() % 100;
 				if (plantacao[i].zona[x].resistencia < random)
 				{
-					*backLogPragas = InserirBackLog(*backLogPragas, plantacao[i].zona[x]);
 					cout << "Uma produção de " << plantacao[i].zona[x].nome << "na horta " << plantacao[i].nome << " foi perdida!" << endl;
+					*backLogPragas = InserirBackLog(*backLogPragas, plantacao[i].zona[x]);					
 					plantacao[i].zona[x].nome = "N/A";
 					plantacao[i].zona[x].duracao = 999;
 					plantacao[i].zona[x].fornecedores = "N/A";
 					plantacao[i].zona[x].rega = 999;
 					plantacao[i].zona[x].resistencia = 100;
-
 				}
 			}
 		}

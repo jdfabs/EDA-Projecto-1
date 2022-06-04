@@ -58,35 +58,34 @@ backLogNode* NovoNode(produto produto) {
 
 
 backLogNode* InserirBackLog(backLogNode* raizBackLog, produto produto) {
-	if (raizBackLog == NULL) {
+	if (raizBackLog == NULL) {		//Se a raiz está vazia, cria um novo
 		raizBackLog = NovoNode(produto);
 
 	}
-	else if (produto.nome[0] < raizBackLog->nomeProduto[0]) {
+	else if (produto.nome[0] < raizBackLog->nomeProduto[0]) { //se a primeira letra for "menor"
 		raizBackLog->anterior = InserirBackLog(raizBackLog->anterior, produto);
 	}
-	else if (produto.nome[0] > raizBackLog->nomeProduto[0]) {
+	else if (produto.nome[0] > raizBackLog->nomeProduto[0]) { //se a primeira letra for "maior"
 		raizBackLog->seguinte = InserirBackLog(raizBackLog->seguinte, produto);
 	}
-	else {
-		if (produto.nome[1] < raizBackLog->nomeProduto[1]) {
+	else { // se for Igual 
+		if (produto.nome[1] < raizBackLog->nomeProduto[1]) {		//se a segunda letra for "menor"
 			raizBackLog->anterior = InserirBackLog(raizBackLog->anterior, produto);
 		}
-		else if (produto.nome[1] > raizBackLog->nomeProduto[1]) {
+		else if (produto.nome[1] > raizBackLog->nomeProduto[1]) {	//se a segunda letra for "maior"
 			raizBackLog->seguinte = InserirBackLog(raizBackLog->seguinte, produto);
 		}
 		else
 		{
-			if (produto.nome[2] < raizBackLog->nomeProduto[2]) {
+			if (produto.nome[2] <= raizBackLog->nomeProduto[2]) {	//se a terceira letra for "menor" ou igual
 				raizBackLog->anterior = InserirBackLog(raizBackLog->anterior, produto);
 			}
-			else if (produto.nome[2] > raizBackLog->nomeProduto[2]) {
+			else if (produto.nome[2] > raizBackLog->nomeProduto[2]) { //se a terceira letra for "maior"
 				raizBackLog->seguinte = InserirBackLog(raizBackLog->seguinte, produto);
 			}
 		}
 	}
 	return raizBackLog;
-
 }
 
 
@@ -103,10 +102,10 @@ void ColheitaManual(string produtoQuery, horta plantacao[], int* hortasCount) {
 				//adiciona o produto ao backlog
 
 				InserirBackLog(plantacao[i].raizBackLog, plantacao[i].zona[x]);
-				/*if (plantacao[i].backlog[y] == "") {
+				/*if (plantacao[i].backlog[y] == "") {			//backlog antigo
 					plantacao[i].backlog[y] = plantacao[i].zona[x].nome;
 					break;
-			}*/
+				}*/
 			}
 			// muda os valores do produto para os default
 			plantacao[i].zona[x].nome = "N/A";
@@ -218,9 +217,10 @@ void ExportarArmazem(int tamanhoDoArmazem, int produtosNoArmazem, produto armaze
 	}
 	save.close();
 }
+
 void ExportarBackLogPragas(backLogNode* backLogPragas) {
 	ofstream save;
-	save.open("SavePragasBacklog.txt", std::ios::app); //abre no final do ficheiro
+	save.open("SavePragasBacklog.txt", std::ios::app); //abre no final do ficheiro (como a função é recursiva não pode estar a abrir no inicio)
 	if (backLogPragas != NULL)
 	{
 		if (backLogPragas->anterior != NULL) {
@@ -235,10 +235,9 @@ void ExportarBackLogPragas(backLogNode* backLogPragas) {
 	save.close();
 
 }
-
 void ExportarBackLogHorta(backLogNode* backLog, string nomeFicheiro) {
 	ofstream save;
-	save.open(nomeFicheiro, std::ios::app); //abre no final do ficheiro
+	save.open(nomeFicheiro, std::ios::app); //abre no final do ficheiro (igual a cima)
 	if (backLog != NULL)
 	{
 		if (backLog->anterior != NULL) {
@@ -252,7 +251,7 @@ void ExportarBackLogHorta(backLogNode* backLog, string nomeFicheiro) {
 	}
 	save.close();
 }
-void ExportarBackLogHortas(horta plantacao[], int hortaCount) {
+void ExportarBackLogHortas(horta plantacao[], int hortaCount) {	//exportar todas as hortas
 	ofstream save;
 	string nomeFicheiro;
 	for (int i = 0; i < hortaCount; i++)
@@ -262,7 +261,7 @@ void ExportarBackLogHortas(horta plantacao[], int hortaCount) {
 		nomeFicheiro.append(".txt");
 		save.open(nomeFicheiro);
 		save << ""; //abre backlog das pragas e "apaga o conteudo" 
-		ExportarBackLogHorta(plantacao[i].raizBackLog, nomeFicheiro);
+		ExportarBackLogHorta(plantacao[i].raizBackLog, nomeFicheiro);	//exportar cada horta
 		save.close();
 	}
 }
@@ -500,21 +499,21 @@ void AlterarArea(horta plantacao[], char nome, string area, int numeroDeHortas, 
 
 
 
-void PrintInOrder(backLogNode* Ptr) {
+void ImprimirOrdenadamente(backLogNode* raiz) {
 
-	if (Ptr->anterior != NULL) {
-		PrintInOrder(Ptr->anterior);
+	if (raiz->anterior != NULL) {
+		ImprimirOrdenadamente(raiz->anterior);
 	}
-	cout << Ptr->nomeProduto << endl;
-	if (Ptr->seguinte != NULL) {
-		PrintInOrder(Ptr->seguinte);
+	cout << raiz->nomeProduto << endl;
+	if (raiz->seguinte != NULL) {
+		ImprimirOrdenadamente(raiz->seguinte);
 	}
 }
 
 void BacklogPragas(backLogNode* backLogPragas) {
 	string input;
 	if (backLogPragas != NULL) {
-		PrintInOrder(backLogPragas);
+		ImprimirOrdenadamente(backLogPragas);
 	}
 	else {
 		cout << "Nada Perdido" << endl;
@@ -532,7 +531,7 @@ void Backlog(char nome, horta plantacao[], int numeroDeHortas) {
 		{
 			if (plantacao[i].raizBackLog != NULL)
 			{
-				PrintInOrder(plantacao[i].raizBackLog);
+				ImprimirOrdenadamente(plantacao[i].raizBackLog);
 			}
 			else
 			{
